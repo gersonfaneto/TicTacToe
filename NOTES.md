@@ -6,10 +6,11 @@
 
 - Exibir o placar do jogo no display.
 
-- Usar a biblioteca padrão:
+- Usar a biblioteca padrão do C (Linux):
 
 > ```c
 > // Captura dos eventos emitidos por dispositivos de entrada.
+> // Ver :: https://chat.openai.com/share/56a5fb37-decc-47e1-9622-2c0206eda6c0
 > #include <linux/input.h>
 > ```
 
