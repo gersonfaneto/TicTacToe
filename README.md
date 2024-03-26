@@ -1,33 +1,26 @@
-## M.I. Sistemas Digitais - Problema 1
+<!-- prettier-ignore -->
+```markdown
+                           _____ _     _____         _____          
+                          |_   _(_) __|_   _|_ _  __|_   _|__   ___ 
+                            | | | |/ __|| |/ _` |/ __|| |/ _ \ / _ \
+                            | | | | (__ | | (_| | (__ | | (_) |  __/
+                            |_| |_|\___||_|\__,_|\___||_|\___/ \___|
+```
 
-### Geral
+## License
 
-- Entrega **26/04**.
+Released under [MIT][license-url] by:
 
-### Produto
+- [Gerson Ferreira dos Anjos Neto][@gersonfaneto]
+- [Yasmin Cordeiro de Souza Meira][@yasmincsme]
 
-- Projeto em `C`, utilizando `Makefile` para facilitar o processo de compilação.
+<!-- prettier-ignore-start -->
 
-- Jogo da Velha.
+<!-- NOTE: Links... -->
 
-  - Interface em modo texto.
+[@gersonfaneto]: https://github.com/gersonfaneto
+[@yasmincsme]: https://github.com/yasmincsme
 
-- Interação feita através do mouse.
+[license-url]: https://github.com/gersonfaneto/TicTacToe/blob/main/LICENSE
 
-  - Distinguir a marcação da confirmação das casas?
-
-  - Conexão via porta USB.
-
-    - Como capturar registrar as informações do dispositivo?
-
-- Interação feita através da placa.
-
-  - Utilizar os botões para seleção de opções em menus/contextos.
-
-  - Exibir o placar do jogo no display.
-
-    - Permitir a definição de um número de rodadas?
-
-### Relatório
-
-- ...
+<!-- prettier-ignore-end -->
