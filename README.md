@@ -12,6 +12,7 @@
 Released under [MIT][license-url] by:
 
 - [Gerson Ferreira dos Anjos Neto][@gersonfaneto]
+- [Natielle Cerqueira Alves][@NathielleA]
 - [Yasmin Cordeiro de Souza Meira][@yasmincsme]
 
 <!-- prettier-ignore-start -->
@@ -19,6 +20,7 @@ Released under [MIT][license-url] by:
 <!-- NOTE: Links... -->
 
 [@gersonfaneto]: https://github.com/gersonfaneto
+[@NathielleA]: https://github.com/NathielleA
 [@yasmincsme]: https://github.com/yasmincsme
 
 [license-url]: https://github.com/gersonfaneto/TicTacToe/blob/main/LICENSE
