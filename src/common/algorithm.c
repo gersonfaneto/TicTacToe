@@ -9,20 +9,27 @@ int verifyAlocation(const int* matrix) {
     return EXIT_SUCCESS;
 }
 
-int** initializeMatrix(int lines, int columns) {
-    
-    int **matrix = (int **) malloc(lines * sizeof(int *));
-    verifyAlocation(matrix);
-    
-    for (int i = 0; i < lines; ++i) {
-        matrix[i] = (int *) malloc(columns * sizeof(int));
-        verifyAlocation(matrix[i]);
+char** initializeMatrix(int rows, int columns) {
+
+    char **matrix = (char **)malloc(rows * sizeof(char *));
+    if (matrix == NULL) {
+        printf("Error allocating memory for matrix rows\n");
+        exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < lines; ++i) {
-        for (int j = 0; j < columns; ++j) {
+    for (int i = 0; i < rows; i++) {
+        matrix[i] = (char *)malloc(columns * sizeof(char));
+        if (matrix[i] == NULL) {
+            printf("Error allocating memory for matrix columns\n");
+            exit(EXIT_FAILURE);
+        }
+        for (int j = 0; j < columns; j++) {
             matrix[i][j] = '-';
         }
     }
-    return matrix;
+
+    return **matrix;
 }
+
+
+
