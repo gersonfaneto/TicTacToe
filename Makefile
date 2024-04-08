@@ -15,7 +15,9 @@ TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 
 # Files to be included in the compilation.
 SOURCES_WITH_HEADERS = \
-											 src/utils/format.c
+											 src/utils/format.c \
+											 src/common/algorithm.c\
+											 
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
