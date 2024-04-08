@@ -17,18 +17,18 @@ char** initializeMatrix(int rows, int columns) {
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < rows; i++) {
+    for (int i = 0; i < rows; ++i) {
         matrix[i] = (char *)malloc(columns * sizeof(char));
         if (matrix[i] == NULL) {
             printf("Error allocating memory for matrix columns\n");
             exit(EXIT_FAILURE);
         }
-        for (int j = 0; j < columns; j++) {
+        for (int j = 0; j < columns; ++j) {
             matrix[i][j] = '-';
         }
     }
 
-    return **matrix;
+    return matrix;
 }
 
 
