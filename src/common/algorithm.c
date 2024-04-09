@@ -23,14 +23,14 @@ char** initializeMatrix(int dimension) {
     return matrix;
 }
 
-int isEmpty(int dimension, int row, int column, char *matrix[dimension]) {
+int isEmpty(int row, int column, char **matrix) {
     if(matrix[row][column] == '-') {
-        return EXIT_FAILURE; 
+        return 1; 
     } 
-    return EXIT_SUCCESS;
+    return 0;
 }
 
-int verifyRows(int dimension, char matrix[dimension][dimension], char playerCharacther) {
+int verifyRows(int dimension, char **matrix, char playerCharacther) {
 
     int win;
 
@@ -49,7 +49,7 @@ int verifyRows(int dimension, char matrix[dimension][dimension], char playerChar
     return 0;
 }
 
-int verifyColumns(int dimension, char matrix[dimension][dimension], char playerCharacther) {
+int verifyColumns(int dimension, char **matrix, char playerCharacther) {
     
     int win;
 
@@ -68,7 +68,7 @@ int verifyColumns(int dimension, char matrix[dimension][dimension], char playerC
     return 0;
 }
 
-int verifyMainDiagonal(int dimension, char matrix[dimension][dimension], char playerCharacther) {
+int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
     
     int win;
 
@@ -85,13 +85,20 @@ int verifyMainDiagonal(int dimension, char matrix[dimension][dimension], char pl
     return 0;
 }
 
-int verigySecundaryDiagonal(int dimension, char matrix[dimension][dimension], char playerCharacther) {
+int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther) {
+    
+    int win = 1; 
 
+    for(int i = 0; i < dimension; ++i) {
+        if(matrix[i][dimension - 1 - i] != playerCharacther) {
+            win = 0; 
+            break;
+        }
+    }
+    if(win) {
+        return 1; 
+    }
+    return 0; 
 }
-
-
-
-
-
 
 
