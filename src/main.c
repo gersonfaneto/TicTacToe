@@ -32,8 +32,7 @@ int main(void) {
 
     printf_at_xy(0, 1, "Canvas :: [%d, %d]", window.cols, window.rows);
     printf_at_xy(0, 2, "Mouse  :: [%d, %d]", mouse.x, mouse.y);
-    printf_at_xy(0, 3, "Clicks :: [%d, %d, %d]", mouse.left, mouse.middle,
-                 mouse.right);
+    printf_at_xy(0, 3, "Clicks :: [%d, %d, %d]", mouse.left, mouse.middle, mouse.right);
 
     printf_at_xy(mouse.x, mouse.y, "%c\n", '@');
 
