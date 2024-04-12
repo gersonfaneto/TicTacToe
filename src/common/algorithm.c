@@ -1,104 +1,100 @@
+#include "common/algorithm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-char** initializeMatrix(int dimension) {
+char **initializeMatrix(int rows, int cols) {
+  char **matrix = (char **)malloc(rows * sizeof(char *));
 
-    char **matrix = (char **)malloc(dimension * sizeof(char *));
-    if (matrix == NULL) {
-        printf("Erro: Falha ao alocar memória\n");
-        exit(EXIT_FAILURE);
+  if (matrix == NULL) {
+    printf("Erro: Falha ao alocar memória\n");
+    exit(EXIT_FAILURE);
+  }
+
+  for (int i = 0; i < rows; ++i) {
+    matrix[i] = (char *)malloc(cols * sizeof(char));
+    if (matrix[i] == NULL) {
+      printf("Erro: Falha ao alocar memória\n");
+      exit(EXIT_FAILURE);
     }
-
-    for (int i = 0; i < dimension; ++i) {
-        matrix[i] = (char *)malloc(dimension * sizeof(char));
-        if (matrix[i] == NULL) {
-            printf("Erro: Falha ao alocar memória\n");
-            exit(EXIT_FAILURE);
-        }
-        for (int j = 0; j < dimension; ++j) {
-            matrix[i][j] = '-';
-        }
+    for (int j = 0; j < cols; ++j) {
+      matrix[i][j] = '-';
     }
+  }
 
-    return matrix;
+  return matrix;
 }
 
 int isEmpty(int row, int column, char **matrix) {
-    if(matrix[row][column] == '-') {
-        return 1; 
-    } 
-    return 0;
+  if (matrix[row][column] == '-') {
+    return 1;
+  }
+  return 0;
 }
 
 int verifyRows(int dimension, char **matrix, char playerCharacther) {
+  int win;
 
-    int win;
-
-    for(int i = 0; i < dimension; ++i) {
-        win = 1;
-        for(int j = 0; j < dimension; ++j) {
-            if(matrix[i][j] != playerCharacther) {
-                win = 0;
-                break;
-            }
-        }
-        if(win) {
-          return 1;
-        }
+  for (int i = 0; i < dimension; ++i) {
+    win = 1;
+    for (int j = 0; j < dimension; ++j) {
+      if (matrix[i][j] != playerCharacther) {
+        win = 0;
+        break;
+      }
     }
-    return 0;
+    if (win) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 int verifyColumns(int dimension, char **matrix, char playerCharacther) {
-    
-    int win;
+  int win;
 
-    for(int i = 0; i < dimension; ++i) {
-        win = 1;
-        for(int j = 0; j < dimension; ++j) {
-            if(matrix[j][i] != playerCharacther) {
-                win = 0;
-                break;
-            }
-        }
-        if(win) {
-          return 1;
-        }
+  for (int i = 0; i < dimension; ++i) {
+    win = 1;
+    for (int j = 0; j < dimension; ++j) {
+      if (matrix[j][i] != playerCharacther) {
+        win = 0;
+        break;
+      }
     }
-    return 0;
+    if (win) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
-    
-    int win;
+  int win;
 
-    for(int i = 0; i < dimension; ++i) {
-        win = 1;
-        if(matrix[i][i] != playerCharacther) {
-            win = 0;
-            break;
-        }
+  for (int i = 0; i < dimension; ++i) {
+    win = 1;
+    if (matrix[i][i] != playerCharacther) {
+      win = 0;
+      break;
     }
-    if(win) {
-        return 1;
-    }
-    return 0;
+  }
+  if (win) {
+    return 1;
+  }
+  return 0;
 }
 
 int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther) {
-    
-    int win = 1; 
+  int win = 1;
 
-    for(int i = 0; i < dimension; ++i) {
-        if(matrix[i][dimension - 1 - i] != playerCharacther) {
-            win = 0; 
-            break;
-        }
+  for (int i = 0; i < dimension; ++i) {
+    if (matrix[i][dimension - 1 - i] != playerCharacther) {
+      win = 0;
+      break;
     }
-    if(win) {
-        return 1; 
-    }
-    return 0; 
+  }
+  if (win) {
+    return 1;
+  }
+  return 0;
 }
-
-
