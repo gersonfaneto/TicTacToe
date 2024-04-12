@@ -51,4 +51,6 @@ int main(void) {
   return 0;
 }
 
-void interruption_handler(i32_t signal) { is_running = 0; }
+void interruption_handler(i32_t signal) {
+  is_running = 0;
+}
