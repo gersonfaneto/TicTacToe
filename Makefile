@@ -18,6 +18,7 @@ SOURCES_WITH_HEADERS = \
 											 src/app/mouse.c \
 											 src/app/window.c \
 											 src/common/termctl.c \
+											 src/common/algorithm.c \
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
