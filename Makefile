@@ -15,9 +15,9 @@ TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 
 # Files to be included in the compilation.
 SOURCES_WITH_HEADERS = \
-											 src/utils/format.c \
-											 src/common/algorithm.c\
-											 
+											 src/app/mouse.c \
+											 src/app/window.c \
+											 src/common/termctl.c \
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
@@ -33,7 +33,10 @@ SOURCES = \
 
 # All *.h files.
 HEADERS = \
-					$(SOURCES_WITH_HEADERS:.c=.h)
+					$(SOURCES_WITH_HEADERS:.c=.h) \
+					src/config.h \
+					src/utils/ui.h \
+					src/common/types.h \
 
 # Files (*.c or *.h) to be ignored in the `format` target.
 IGNORE_FILES_FORMAT =
@@ -49,7 +52,8 @@ OBJECT_NAMES = $(SOURCES:.c=.o)
 OBJECTS = $(patsubst %, $(OBJ_DIR)/%, $(OBJECT_NAMES))
 
 # Flags to tune error levels in the compilation process.
-WFLAGS = -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -Wall -Wextra -Werror -pedantic
+WFLAGS += -Wno-unused-parameter  -Wno-unused-variable -Wno-unused-but-set-variable
 
 # Flags to be passed in the compilation and linking process, respectively.
 CFLAGS = -std=c99
