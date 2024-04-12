@@ -29,7 +29,8 @@ void read_mouse(mouse_t* mouse, i32_t rows, i32_t cols) {
       mouse->x = cols;
     }
 
-    mouse->y += ((data[2] * -1) / ((MOUSE_SENSIBILITY > 0) ? MOUSE_SENSIBILITY : 1));
+    mouse->y +=
+        ((data[2] * -1) / ((MOUSE_SENSIBILITY > 0) ? MOUSE_SENSIBILITY : 1));
 
     if (mouse->y < 0) {
       mouse->y = 0;
@@ -45,7 +46,8 @@ mouse_t init_mouse(i32_t x, i32_t y) {
   i32_t fd = open(MOUSE_DEVICE_PATH, O_RDONLY);
 
   if (fd == -1) {
-    fprintf(stderr, "Failed to open file \"%s\" :: Cause %s.\n", MOUSE_DEVICE_PATH, strerror(errno));
+    fprintf(stderr, "Failed to open file \"%s\" :: Cause %s.\n",
+            MOUSE_DEVICE_PATH, strerror(errno));
     exit(1);
   }
 
