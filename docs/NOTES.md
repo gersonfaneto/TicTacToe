@@ -1,21 +1,8 @@
 ## M.I. Sistemas Digitais - Problema 1
 
-### Ideias
+### Tabuleiro
 
-- Utilizar os botões para seleção de opções em menus/contextos.
-
-- Exibir o placar do jogo no display.
-
-- Usar a biblioteca padrão do C (Linux):
-
-> ```c
-> // Captura dos eventos emitidos por dispositivos de entrada.
-> // Ver :: https://chat.openai.com/share/56a5fb37-decc-47e1-9622-2c0206eda6c0
-> #include <linux/input.h>
-> ```
-
-#### Tabuleiro
-
+<!-- prettier-ignore-start -->
    ___    _          _        
   / _ \  | |        | |       
  | | | | | |        | |       
@@ -48,19 +35,16 @@ __  __
  /  \  
 /_/\_\ 
        
+<!-- prettier-ignore-end -->
 
-### Fatos
+### Mouse
 
-- Projeto em `C`, utilizando `Makefile` para facilitar o processo de compilação.
+- O arquivo `/dev/input/mice` registra os eventos de todos os dispositivos tipos "mouse".
 
-- Jogo da Velha.
+- A codificação é feita em 3 bytes:
 
-- Interface em modo texto.
+  - Byte 0 :: Flags que representam o estado atual do dispositivo. O quinto bit (esquerda → direita) é
+    fixo em 1 e os 3 últimos bits representam, respectivamente, os botões esquerdo, direito e do meio
+    do mouse.
 
-- Interação feita através do mouse e/ou da placa.
-
-### Questões
-
-- Distinguir a marcação da confirmação das casas?
-
-- Como capturar/registrar as informações do dispositivo?
+  - Bytes 1 e 2 :: Coeficiente de deslocamento nos eixos X e Y, respectivamente, variando entre -127 a 127.
