@@ -3,3 +3,4 @@ build/
 
 # Tools.
 .clangd
+.vscode/
