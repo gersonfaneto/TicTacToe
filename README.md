@@ -12,7 +12,7 @@
 Released under [MIT][license-url] by:
 
 - [Gerson Ferreira dos Anjos Neto][@gersonfaneto]
-- [Natielle Cerqueira Alves][@NathielleA]
+- [Nathielle Cerqueira Alves][@NathielleA]
 - [Yasmin Cordeiro de Souza Meira][@yasmincsme]
 
 <!-- prettier-ignore-start -->
