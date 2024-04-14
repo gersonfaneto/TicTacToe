@@ -19,6 +19,7 @@ TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 SOURCES_WITH_HEADERS = \
 											 src/app/mouse.c \
 											 src/app/window.c \
+											 src/app/handlers.c \
 											 src/common/termctl.c \
 											 src/common/algorithm.c \
 
@@ -37,6 +38,7 @@ SOURCES = \
 # All *.h files.
 HEADERS = \
 					$(SOURCES_WITH_HEADERS:.c=.h) \
+					src/state.h \
 					src/config.h \
 					src/utils/ui.h \
 					src/common/types.h \
