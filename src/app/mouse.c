@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 #include "config.h"
+#include "state.h"
 
 void read_mouse(mouse_t* mouse, i32_t rows, i32_t cols) {
   i8_t data[3] = {0};
@@ -41,7 +42,7 @@ void read_mouse(mouse_t* mouse, i32_t rows, i32_t cols) {
   }
 }
 
-mouse_t init_mouse(i32_t x, i32_t y) {
+mouse_t init_mouse(void) {
   i32_t fd = open(MOUSE_DEVICE_PATH, O_RDONLY);
 
   if (fd == -1) {
@@ -51,8 +52,8 @@ mouse_t init_mouse(i32_t x, i32_t y) {
 
   return (mouse_t){
       .fd = fd,
-      .x = x,
-      .y = y,
+      .x = state.mouse.x,
+      .y = state.mouse.y,
       .left = 0,
       .right = 0,
       .middle = 0,

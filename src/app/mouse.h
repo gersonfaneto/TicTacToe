@@ -16,6 +16,6 @@ struct mouse_t {
   void (*read)(mouse_t* mouse, i32_t rows, i32_t cols);
 };
 
-mouse_t init_mouse(i32_t x, i32_t y);
+mouse_t init_mouse();
 
 #endif  // !MOUSE_H_
