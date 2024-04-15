@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+/*O JOGO COMEÇA JÁ DEFINDO QUE O PRIMEIRO JOGADOR É O X(XIS) E O SEGUNDO É O O(BOLINHA)*/
+
+int main(void) {
     char playerOne = 'x';
     char playerTwo = 'o';
 
@@ -31,10 +33,33 @@ int main() {
     while (win == 0 && verifyPlayerTurn != 8) {
 
         //Verifica de qual jogador é a vez
-        if (verifyPlayerTurn)
-        //Jogador seleciona a casa do tabuleiro que deseja jogar
-        matrix[rowSelectedCell][colSelectedCell] = 
-        
+        if (verifyPlayerTurn%2 == 0) {
+            
+            //Jogador seleciona a casa do tabuleiro que deseja jogar
+            //int rowSelectedCell = ;******
+            //int colSelectedCell = ;******
+            matrix[rowSelectedCell][colSelectedCell] = playerOne;
+
+            //Funções que verificam se o jogador 1 ganhou a partida
+            win = verifyRows(rows, matrix, playerOne);
+            win = verifyColumns(rows, matrix, playerOne);
+            win = verifyMainDiagonal(rows, matrix, playerOne);
+            win = verifySecundaryDiagonal(rows, matrix, playerOne);
+         
+        } else {
+
+            //Jogador seleciona a casa do tabuleiro que deseja jogar
+            //int rowSelectedCell = ;******
+            //int colSelectedCell = ;******
+            matrix[rowSelectedCell][colSelectedCell] = playerTwo;
+
+            //Funções que verificam se o jogador 2 ganhou a partida
+            win = verifyRows(rows, matrix, playerTwo);
+            win = verifyColumns(rows, matrix, playerTwo);
+            win = verifyMainDiagonal(rows, matrix, playerTwo);
+            win = verifySecundaryDiagonal(rows, matrix, playerTwo);
+        }
+         
         verifyPlayerTurn += 1;
 
     }

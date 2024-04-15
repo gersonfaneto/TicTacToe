@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*Esta função aloca dinamicamente uma matriz de caracteres (char) com o 
+  número de linhas especificado em rows e o número de colunas especificado em cols.*/
+
 char **initializeMatrix(int rows, int cols) {
   char **matrix = (char **)malloc(rows * sizeof(char *));
 
@@ -25,6 +28,7 @@ char **initializeMatrix(int rows, int cols) {
   return matrix;
 }
 
+/**/
 int isEmpty(int row, int column, char **matrix) {
   if (matrix[row][column] == '-') {
     return 1;
@@ -32,6 +36,7 @@ int isEmpty(int row, int column, char **matrix) {
   return 0;
 }
 
+/*Esta função verifica se o jogador representado pelo caractere playerCharacther ganhou em alguma linha da matriz.*/
 int verifyRows(int dimension, char **matrix, char playerCharacther) {
   int win;
 
@@ -50,6 +55,7 @@ int verifyRows(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
+/*Esta função verifica se o jogador ganhou em alguma coluna da matriz.*/
 int verifyColumns(int dimension, char **matrix, char playerCharacther) {
   int win;
 
@@ -68,6 +74,7 @@ int verifyColumns(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
+/*Esta função verifica se o jogador ganhou na diagonal principal da matriz.*/
 int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
   int win;
 
@@ -84,6 +91,7 @@ int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
+/*Esta função verifica se o jogador ganhou na diagonal secundária da matriz.*/
 int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther) {
   int win = 1;
 
