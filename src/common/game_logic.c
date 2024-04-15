@@ -59,8 +59,8 @@ int main(void) {
             win = verifyMainDiagonal(rows, matrix, playerTwo);
             win = verifySecundaryDiagonal(rows, matrix, playerTwo);
         }
-         
-        verifyPlayerTurn += 1;
+
+        verifyPlayerTurn += 1; //Acrescenta mais um para indicar que a jogada é do próximo jogador
 
     }
 }
