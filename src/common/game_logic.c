@@ -47,8 +47,7 @@ int main(void) {
             while (selectionError == 1) {
 
                 //Jogador seleciona a casa do tabuleiro que deseja jogar
-                //int rowSelectedCell = ;******
-                //int colSelectedCell = ;******
+                scanf("%d %d", &rowSelectedCell, &colSelectedCell);
 
                 if (isEmpty(rowSelectedCell, colSelectedCell, matrix)) {
                     matrix[rowSelectedCell][colSelectedCell] = playerOne;
@@ -59,7 +58,7 @@ int main(void) {
             }
 
             //Exibindo no tabuleiro o x na casa escolhida
-
+            showMatrix(rows, matrix);
 
             //Funções que verificam se o jogador 1 ganhou a partida
             win = verifyRows(rows, matrix, playerOne);
@@ -74,8 +73,7 @@ int main(void) {
             while (selectionError == 1) {
 
                 //Jogador seleciona a casa do tabuleiro que deseja jogar
-                //int rowSelectedCell = ;******
-                //int colSelectedCell = ;******
+                scanf("%d %d", &rowSelectedCell, &colSelectedCell);
 
                 if (isEmpty(rowSelectedCell, colSelectedCell, matrix)) {
                     matrix[rowSelectedCell][colSelectedCell] = playerTwo;
@@ -86,6 +84,7 @@ int main(void) {
             }
             
             //Exibindo no tabuleiro o x na casa escolhida
+            showMatrix(rows, matrix);
 
             //Funções que verificam se o jogador 2 ganhou a partida
             win = verifyRows(rows, matrix, playerTwo);
