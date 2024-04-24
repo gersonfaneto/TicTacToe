@@ -108,7 +108,7 @@ int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther)
 }
 
 /*Função para imprimir a matriz no terminal (somente para a fase de testes iniciais)*/
-int showMatrix(int dimension, char **matrix) {
+void showMatrix(int dimension, char **matrix) {
   for (int i = 0; i<dimension; i++) {
     for (int j; j<dimension; j++) {
       printf("%c \n", matrix[i][j]);

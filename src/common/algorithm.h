@@ -7,6 +7,6 @@ int verifyRows(int dimension, char **matrix, char playerCharacther);
 int verifyColumns(int dimension, char **matrix, char playerCharacther);
 int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther);
 int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther);
-int showMatrix(int dimension, char **matrix);
+void showMatrix(int dimension, char **matrix);
 
-#endif
+#endif  // !ALGORITHM_H_
