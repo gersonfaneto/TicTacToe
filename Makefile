@@ -4,18 +4,24 @@ CC = gcc
 # Name for the main executable of the project.
 TARGET_NAME = game
 
-# Directories related to the build project.
+# Directories/Files related to the build of the project.
 BUILD_DIR = build
 
 OBJ_DIR = $(BUILD_DIR)/obj
 BIN_DIR = $(BUILD_DIR)/bin
 
-# Location for the main executable of the project.
+COMPILATION_DATABASE = $(BUILD_DIR)/compile_commands.json
+
+# Location of the project final executable.
 TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 
 # Files to be included in the compilation.
 SOURCES_WITH_HEADERS = \
-											 src/utils/format.c
+											 src/app/mouse.c \
+											 src/app/window.c \
+											 src/app/handlers.c \
+											 src/common/termctl.c \
+											 src/common/algorithm.c \
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
@@ -31,7 +37,11 @@ SOURCES = \
 
 # All *.h files.
 HEADERS = \
-					$(SOURCES_WITH_HEADERS:.c=.h)
+					$(SOURCES_WITH_HEADERS:.c=.h) \
+					src/state.h \
+					src/config.h \
+					src/utils/ui.h \
+					src/common/types.h \
 
 # Files (*.c or *.h) to be ignored in the `format` target.
 IGNORE_FILES_FORMAT =
@@ -47,7 +57,9 @@ OBJECT_NAMES = $(SOURCES:.c=.o)
 OBJECTS = $(patsubst %, $(OBJ_DIR)/%, $(OBJECT_NAMES))
 
 # Flags to tune error levels in the compilation process.
-WFLAGS = -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -Wall -Wextra -pedantic
+WFLAGS += -Wno-unused-parameter -Wno-unused-variable \
+					-Wno-unused-but-set-variable -Wno-missing-field-initializers
 
 # Flags to be passed in the compilation and linking process, respectively.
 CFLAGS = -std=c99
@@ -57,8 +69,6 @@ LDFLAGS = $(addprefix -I, $(INCLUDE_DIRS))
 help: ## Show all the available targets.
 	@echo "Available targets:"
 	@grep -E "^[a-zA-Z0-9_-]+:.*?## .*$$" $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
-
-all: build run ## Executes the `build` and `run` targets, in that order.
 
 # Linking...
 $(TARGET): $(OBJECTS) $(HEADERS)
@@ -73,8 +83,11 @@ $(OBJ_DIR)/%.o: %.c
 
 build: $(TARGET) ## Compiles the project.
 
-run: $(TARGET) ## Runs the project.
-	@./$^
+run: $(TARGET) ## Runs the project with `root` permissions.
+	sudo @./$^
+
+clean: ## Remove all files generated in the compilation.
+	@rm -rf $(BUILD_DIR)
 
 format: ## Formats code using `clang-format`.
 ifeq (, $(shell which clang-format 2> /dev/null))
@@ -83,7 +96,12 @@ else
 	@clang-format -i $(SOURCES_FORMAT) $(HEADERS_FORMAT)
 endif
 
-clean: ## Remove all files generated in the compilation.
-	@rm -rf $(BUILD_DIR)
+compilation-db: ## Generates the compilation database using `bear`.
+	@mkdir -p $(BUILD_DIR)
+ifeq (, $(shell which bear 2> /dev/null))
+	$(error `bear` wasn't found! Consider installing it trough your package manager)
+else
+	@bear --output build/compile_commands.json -- make -B build > /dev/null 2>&1
+endif
 
 .PHONY: all help format build run clean
