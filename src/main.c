@@ -5,29 +5,7 @@
 #include "app/handlers.h"
 #include "common/termctl.h"
 #include "state.h"
-
-#define PLAYER_X 0
-#define PLAYER_Y 1
-
-#define PLAYER_COMPONET_WIDTH 7
-#define PLAYER_COMPONET_HEIGHT 5
-
-const char* players[][PLAYER_COMPONET_HEIGHT] = {
-    {
-        "  ___  ",
-        " / _ \\ ",
-        "| | | |",
-        "| |_| |",
-        " \\___/ ",
-    },
-    {
-        "__  __ ",
-        "\\ \\/ / ",
-        " \\  /  ",
-        " /  \\  ",
-        "/_/\\_\\ ",
-    },
-};
+#include "utils/ui.h"
 
 state_t state;
 
