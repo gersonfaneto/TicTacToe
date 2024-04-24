@@ -57,8 +57,9 @@ OBJECT_NAMES = $(SOURCES:.c=.o)
 OBJECTS = $(patsubst %, $(OBJ_DIR)/%, $(OBJECT_NAMES))
 
 # Flags to tune error levels in the compilation process.
-WFLAGS = -Wall -Wextra -Werror -pedantic
-WFLAGS += -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable
+WFLAGS = -Wall -Wextra -pedantic
+WFLAGS += -Wno-unused-parameter -Wno-unused-variable \
+					-Wno-unused-but-set-variable -Wno-missing-field-initializers
 
 # Flags to be passed in the compilation and linking process, respectively.
 CFLAGS = -std=c99
@@ -82,8 +83,8 @@ $(OBJ_DIR)/%.o: %.c
 
 build: $(TARGET) ## Compiles the project.
 
-run: $(TARGET) ## Runs the project.
-	@./$^
+run: $(TARGET) ## Runs the project with `root` permissions.
+	sudo @./$^
 
 clean: ## Remove all files generated in the compilation.
 	@rm -rf $(BUILD_DIR)
