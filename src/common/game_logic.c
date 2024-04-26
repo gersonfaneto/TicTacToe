@@ -23,7 +23,7 @@ char **initializeMatrix(int rows, int cols) {
     }
     for (j = 0; j < cols; ++j) {
       matrix[i][j] = '-';
-      printf("%d, %d\n", i, j);
+      printf("%d,%d\n", i, j);
     }
   }
 
@@ -127,7 +127,7 @@ int showMatrix(int dimension, char **matrix) {
 
 int main(void) {
 
-    printf("Bem-vindo ao TicTacToe!");
+    printf("Bem-vindo ao TicTacToe!\n");
     
     char playerOne = 'x';
     char playerTwo = 'o';
@@ -172,13 +172,14 @@ int main(void) {
             while (selectionError == 1) {
 
                 //Jogador seleciona a casa do tabuleiro que deseja jogar
-                scanf("%d, %d", &rowSelectedCell, &colSelectedCell);
+                scanf("%d,%d", &rowSelectedCell, &colSelectedCell);
 
                 if (isEmpty(rowSelectedCell, colSelectedCell, matrix) == 1) {
                     matrix[rowSelectedCell][colSelectedCell] = playerOne;
                     selectionError = 0;
                 } else {
                     printf("Essa casa já está ocupada! Selecione novamente.");
+                    selectionError = 1;
                 }
                 getchar();
             }
@@ -188,9 +189,13 @@ int main(void) {
 
             //Funções que verificam se o jogador 1 ganhou a partida
             win = verifyRows(rows, matrix, playerOne);
+            if (win == 1){break;}
             win = verifyColumns(rows, matrix, playerOne);
+            if (win == 1){break;}
             win = verifyMainDiagonal(rows, matrix, playerOne);
+            if (win == 1){break;}
             win = verifySecundaryDiagonal(rows, matrix, playerOne);
+            if (win == 1){break;}
          
         } else {
 
@@ -199,7 +204,7 @@ int main(void) {
             while (selectionError == 1) {
 
                 //Jogador seleciona a casa do tabuleiro que deseja jogar
-                scanf("%d %d", &rowSelectedCell, &colSelectedCell);
+                scanf("%d,%d", &rowSelectedCell, &colSelectedCell);
 
                 if (isEmpty(rowSelectedCell, colSelectedCell, matrix) == 1) {
                     matrix[rowSelectedCell][colSelectedCell] = playerTwo;
@@ -216,9 +221,13 @@ int main(void) {
 
             //Funções que verificam se o jogador 2 ganhou a partida
             win = verifyRows(rows, matrix, playerTwo);
+            if (win == 1){break;}
             win = verifyColumns(rows, matrix, playerTwo);
+            if (win == 1){break;}
             win = verifyMainDiagonal(rows, matrix, playerTwo);
+            if (win == 1){break;}
             win = verifySecundaryDiagonal(rows, matrix, playerTwo);
+            if (win == 1){break;}
         }
 
         verifyPlayerTurn += 1; //Acrescenta mais um para indicar que a jogada é do próximo jogador
@@ -226,10 +235,10 @@ int main(void) {
 
     //Após o término da partida, verifica quem ganhou ou se houve empate e exibi o resultado
     if (verifyPlayerTurn == 8 && win == 0) {
-        printf("EMPATE!");
+        printf("EMPATE!\n");
     } else if (win == 1 && verifyPlayerTurn%2 == 0) {
-        printf("JOGADOR 1 GANHOU!");
+        printf("JOGADOR 1 GANHOU!\n");
     } else if (win == 1 && verifyPlayerTurn%2 != 0) {
-        printf("JOGADOR 2 GANHOU!");
+        printf("JOGADOR 2 GANHOU!\n");
     }
 }
