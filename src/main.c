@@ -48,6 +48,7 @@ int main(void) {
     }
 
     printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
+    printf("%d, %d", state.mouse.x, state.mouse.y);
 
     state.mouse.read(&state.mouse, state.window.rows, state.window.cols);
   }
