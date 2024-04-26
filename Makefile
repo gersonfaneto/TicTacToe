@@ -84,7 +84,8 @@ $(OBJ_DIR)/%.o: %.c
 build: $(TARGET) ## Compiles the project.
 
 run: $(TARGET) ## Runs the project with `root` permissions.
-	sudo @./$^
+	#sudo @./$^
+	sudo ./build/bin/game
 
 clean: ## Remove all files generated in the compilation.
 	@rm -rf $(BUILD_DIR)
