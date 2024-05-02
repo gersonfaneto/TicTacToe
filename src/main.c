@@ -4,33 +4,8 @@
 
 #include "app/handlers.h"
 #include "common/termctl.h"
-#include "state.h"
-#include "utils/ui.h"
-
-
-#define PLAYER_X 0
-#define PLAYER_Y 1
-
-#define PLAYER_COMPONET_WIDTH 7 //largura
-#define PLAYER_COMPONET_HEIGHT 5 //altura
-
-
-/*const char* players[][PLAYER_COMPONET_HEIGHT] = {
-    {
-        "  ___  ",
-        " / _ \\ ",
-        "| | | |",
-        "| |_| |",
-        " \\___/ ",
-    },
-    {
-        "__  __ ",
-        "\\ \\/ / ",
-        " \\  /  ",
-        " /  \\  ",
-        "/_/\\_\\ ",
-    },
-};*/
+//#include "state.h"
+#include "app/appearance.h"
 
 state_t state;
 
@@ -43,8 +18,8 @@ int main(void) {
   state.mouse.x = state.window.cols / 2;
   state.mouse.y = state.window.rows / 2;
 
-  int camp_width = PLAYER_COMPONET_WIDTH + 4;
-  int camp_heigth = PLAYER_COMPONET_HEIGHT + 2;
+  int camp_width = PLAYER_COMPONENT_WIDTH + 4;
+  int camp_heigth = PLAYER_COMPONENT_HEIGHT + 2;
 
   set_handlers();
 
