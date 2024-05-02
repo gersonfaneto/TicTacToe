@@ -1,7 +1,8 @@
 #ifndef MOUSE_H_
 #define MOUSE_H_
 
-#include "common/types.h"
+//#include "common/types.h"
+#include "appearance.h"
 
 /**
  * struct mouse_t - Defines a model to store the information related to the
@@ -35,6 +36,8 @@ struct mouse_t {
  *
  * @return The properly initialized `struct mouse_t`.
  */
-mouse_t init_mouse();
+mouse_t init_mouse(void);
+
+i8_t* get_mouse(i8_t mouse_x, i8_t mouse_y, board_t board);
 
 #endif  // !MOUSE_H_

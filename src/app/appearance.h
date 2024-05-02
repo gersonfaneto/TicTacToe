@@ -3,25 +3,31 @@
 
 #include "common/types.h"
 #include "utils/ui.h"
+#include "state.h"
 
-typedef struct quadrant quadrant;
+typedef struct quadrant_t quadrant_t;
 
-struct quadrant{
+struct quadrant_t{
     i8_t width; 
     i8_t height;
 };
 
-quadrant init_quadrant();
+quadrant_t init_quadrant();
 
-typedef struct board board;
+typedef struct board_t board_t;
 
-struct board{
-    i8_t middle_x;
-    i8_t middle_y;
-    i8_t width;
-    i8_t height;
+struct board_t{
+    i8_t row0;
+    i8_t row1;
+    i8_t row2;
+    i8_t row3;
+
+    i8_t col0;
+    i8_t col1;
+    i8_t col2;
+    i8_t col3;
 };
 
-board init_board();
+board_t init_board();
 
 #endif  // !APPEARANCE_H_
