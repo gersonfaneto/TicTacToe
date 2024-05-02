@@ -2,6 +2,7 @@
 #define HANDLERS_H_
 
 #include "common/types.h"
+#include "state.h"
 
 /**
  * @brief Sets the handlers for events related to the current window.
