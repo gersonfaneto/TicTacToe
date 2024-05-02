@@ -22,6 +22,8 @@ SOURCES_WITH_HEADERS = \
 											 src/app/handlers.c \
 											 src/common/termctl.c \
 											 src/common/algorithm.c \
+											 src/app/appearance.c\
+
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
