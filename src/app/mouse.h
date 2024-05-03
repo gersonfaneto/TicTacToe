@@ -1,8 +1,8 @@
 #ifndef MOUSE_H_
 #define MOUSE_H_
 
-//#include "common/types.h"
-#include "appearance.h"
+#include "common/types.h"
+#include "app/appearance.h"
 
 /**
  * struct mouse_t - Defines a model to store the information related to the
