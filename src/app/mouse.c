@@ -8,6 +8,8 @@
 #include <unistd.h>
 
 #include "config.h"
+// #include "state.h"
+#include "appearance.h"
 #include "state.h"
 
 void read_mouse(mouse_t* mouse, i32_t rows, i32_t cols) {
