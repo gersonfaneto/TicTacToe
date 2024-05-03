@@ -4,7 +4,7 @@
 
 #include "app/handlers.h"
 #include "common/termctl.h"
-//#include "state.h"
+#include "state.h"
 //#include "app/mouse.h"
 #include "app/appearance.h"
 
