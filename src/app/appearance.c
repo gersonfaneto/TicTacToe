@@ -1,4 +1,7 @@
 #include "appearance.h"
+#include "utils/ui.h"
+
+#include "state.h"
 
 quadrant_t init_quadrant() {
 
