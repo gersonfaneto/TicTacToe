@@ -2,8 +2,6 @@
 #define APPEARANCE_H_
 
 #include "common/types.h"
-#include "utils/ui.h"
-#include "state.h"
 
 typedef struct quadrant_t quadrant_t;
 
