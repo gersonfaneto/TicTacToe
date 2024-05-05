@@ -17,11 +17,11 @@ TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 
 # Files to be included in the compilation.
 SOURCES_WITH_HEADERS = \
+											 src/common/algorithm.c \
 											 src/app/mouse.c \
 											 src/app/window.c \
 											 src/app/handlers.c \
 											 src/common/termctl.c \
-											 src/common/algorithm.c \
 											 src/app/appearance.c\
 
 
