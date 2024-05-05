@@ -3,10 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*Esta função aloca dinamicamente uma matriz de caracteres (char) com o 
-  número de linhas especificado em rows e o número de colunas especificado em cols.*/
-
-char **init_Matrix(int rows, int cols) {
+char **init_Matrix(i8_t rows, i8_t cols) {
   char **matrix = (char **)malloc(rows * sizeof(char *));
 
   if (matrix == NULL) {
@@ -14,13 +11,13 @@ char **init_Matrix(int rows, int cols) {
     exit(EXIT_FAILURE);
   }
 
-  for (int i = 0; i < rows; ++i) {
+  for (i8_t i = 0; i < rows; ++i) {
     matrix[i] = (char *)malloc(cols * sizeof(char));
     if (matrix[i] == NULL) {
       printf("Erro: Falha ao alocar memória\n");
       exit(EXIT_FAILURE);
     }
-    for (int j = 0; j < cols; ++j) {
+    for (i8_t j = 0; j < cols; ++j) {
       matrix[i][j] = '-';
     }
   }
@@ -28,21 +25,19 @@ char **init_Matrix(int rows, int cols) {
   return matrix;
 }
 
-/**/
-int isEmpty(int row, int column, char **matrix) {
+int isEmpty(i8_t row, i8_t column, char **matrix) {
   if (matrix[row][column] == '-') {
     return 1;
   }
   return 0;
 }
 
-/*Esta função verifica se o jogador representado pelo caractere playerCharacther ganhou em alguma linha da matriz.*/
-int verifyRows(int dimension, char **matrix, char playerCharacther) {
+int verifyRows(i8_t dimension, char **matrix, char playerCharacther) {
   int win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
-    for (int j = 0; j < dimension; ++j) {
+    for (i8_t j = 0; j < dimension; ++j) {
       if (matrix[i][j] != playerCharacther) {
         win = 0;
         break;
@@ -55,13 +50,12 @@ int verifyRows(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou em alguma coluna da matriz.*/
-int verifyColumns(int dimension, char **matrix, char playerCharacther) {
+int verifyColumns(i8_t dimension, char **matrix, char playerCharacther) {
   int win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
-    for (int j = 0; j < dimension; ++j) {
+    for (i8_t j = 0; j < dimension; ++j) {
       if (matrix[j][i] != playerCharacther) {
         win = 0;
         break;
@@ -74,11 +68,10 @@ int verifyColumns(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou na diagonal principal da matriz.*/
-int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
+int verifyMainDiagonal(i8_t dimension, char **matrix, char playerCharacther) {
   int win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
     if (matrix[i][i] != playerCharacther) {
       win = 0;
@@ -91,11 +84,10 @@ int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou na diagonal secundária da matriz.*/
-int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther) {
+int verifySecundaryDiagonal(i8_t dimension, char **matrix, char playerCharacther) {
   int win = 1;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     if (matrix[i][dimension - 1 - i] != playerCharacther) {
       win = 0;
       break;
@@ -107,10 +99,9 @@ int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther)
   return 0;
 }
 
-/*Função para imprimir a matriz no terminal (somente para a fase de testes iniciais)*/
-void showMatrix(int dimension, char **matrix) {
-  for (int i = 0; i<dimension; i++) {
-    for (int j; j<dimension; j++) {
+void showMatrix(i8_t dimension, char **matrix) {
+  for (i8_t i = 0; i<dimension; i++) {
+    for (i8_t j; j<dimension; j++) {
       printf("%c \n", matrix[i][j]);
     }
   }
