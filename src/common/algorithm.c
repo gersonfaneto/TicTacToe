@@ -6,7 +6,7 @@
 /*Esta função aloca dinamicamente uma matriz de caracteres (char) com o 
   número de linhas especificado em rows e o número de colunas especificado em cols.*/
 
-char **initializeMatrix(int rows, int cols) {
+char **init_Matrix(int rows, int cols) {
   char **matrix = (char **)malloc(rows * sizeof(char *));
 
   if (matrix == NULL) {
