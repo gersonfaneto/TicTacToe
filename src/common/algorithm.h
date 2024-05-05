@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
 
-char **initializeMatrix(int rows, int columns);
+char **init_Matrix(int rows, int columns);
 
 int isEmpty(int row, int column, char **matrix);
 
