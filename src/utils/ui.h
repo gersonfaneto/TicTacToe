@@ -20,6 +20,8 @@
 #define SPACE_WIDTH_BORDER 4
 #define SPACE_HEIGHT_BORDER 2
 
+#define DIMENSION 3
+
 /*const char* players[][PLAYER_COMPONENT_HEIGHT] = {
     {
         "  ___  ",
