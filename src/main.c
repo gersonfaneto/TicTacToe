@@ -5,7 +5,6 @@
 #include "app/handlers.h"
 #include "common/termctl.h"
 #include "state.h"
-//#include "app/mouse.h"
 #include "app/appearance.h"
 
 state_t state;
@@ -25,7 +24,7 @@ int main(void) {
   disable_cursor();
   disable_echo();
 
-  i8_t quadrant[2];
+  i8_t* quadrant; //armazena o endereço do array com as coordenadas
   board = init_board();
 
   while (state.is_running) {
@@ -35,7 +34,7 @@ int main(void) {
     printf_at_xy(0, 2, "Mouse  :: [%d, %d]", state.mouse.x, state.mouse.y);
     printf_at_xy(0, 3, "Clicks :: [%d, %d, %d]", state.mouse.left, state.mouse.middle, state.mouse.right);
 
-    quadrant[2] = get_mouse(state.mouse.x, state.mouse.y, board);
+    quadrant = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
 
     printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
 
