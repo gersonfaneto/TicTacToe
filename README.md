@@ -31,6 +31,9 @@
 
 ## Introdução
 
+Este documento apresenta a documentação do projeto de um Jogo da Velha desenvolvido em linguagem C para ser executado em um ambiente de terminal, em modo texto, em sistema operacional Linux. O jogo foi implementado para permitir a interação de dois jogadores, utilizando um mouse conectado a uma das portas USB do Kit de desenvolvimento DE1-SoC, para que, a partir do mouse, cada um dos dois jogadores possa selecionar as posições no tabuleiro a cada jogada. 
+
+Além disso, como auxílio, os botões disponíveis na placa foram utilizados para funções de controle, como iniciar e parar o jogo.
 
 
 ## License
