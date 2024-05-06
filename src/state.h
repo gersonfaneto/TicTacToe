@@ -1,8 +1,8 @@
 #ifndef STATE_H_
 #define STATE_H_
 
-#include "app/mouse.h"
 #include "app/window.h"
+#include "app/mouse.h"
 
 /**
  * struct state_t - Defines a model to hold the current state of the game, making

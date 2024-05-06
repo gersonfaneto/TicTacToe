@@ -8,6 +8,8 @@
 #include <unistd.h>
 
 #include "config.h"
+// #include "state.h"
+#include "appearance.h"
 #include "state.h"
 
 void read_mouse(mouse_t* mouse, i32_t rows, i32_t cols) {
@@ -52,11 +54,32 @@ mouse_t init_mouse(void) {
 
   return (mouse_t){
       .fd = fd,
-      .x = state.mouse.x,
-      .y = state.mouse.y,
+      .x = state.window.cols * 0.5,
+      .y = state.window.rows * 0.5,
       .left = 0,
       .right = 0,
       .middle = 0,
       .read = read_mouse,
   };
+}
+
+i8_t* get_mouse(i8_t mouse_x, i8_t mouse_y, board_t board) {
+
+    i8_t* array = malloc(2 * sizeof(int8_t));
+
+    if (array == NULL) {
+        perror("Erro ao alocar memória");
+        exit(EXIT_FAILURE);
+    }
+
+    if (mouse_x >= board.col0 && mouse_x <= board.col3 && mouse_y >= board.row0 && mouse_y <= board.row3) {
+      array[0] = (mouse_y - board.row0) / ((board.row3 - board.row0) / 3);
+      array[1] = (mouse_x - board.col0) / ((board.col3 - board.col0) / 3);
+    }
+    else {
+      array[0] = -1;
+      array[1] = -1;
+    }
+
+    return array;
 }

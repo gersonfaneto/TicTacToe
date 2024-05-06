@@ -2,48 +2,31 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "state.h"
 
-/*Esta função aloca dinamicamente uma matriz de caracteres (char) com o 
-  número de linhas especificado em rows e o número de colunas especificado em cols.*/
-
-char **initializeMatrix(int rows, int cols) {
-  char **matrix = (char **)malloc(rows * sizeof(char *));
-
-  if (matrix == NULL) {
-    printf("Erro: Falha ao alocar memória\n");
-    exit(EXIT_FAILURE);
-  }
-
-  for (int i = 0; i < rows; ++i) {
-    matrix[i] = (char *)malloc(cols * sizeof(char));
-    if (matrix[i] == NULL) {
-      printf("Erro: Falha ao alocar memória\n");
-      exit(EXIT_FAILURE);
-    }
-    for (int j = 0; j < cols; ++j) {
-      matrix[i][j] = '-';
+/*
+void init_matrix(board_t board, i8_t dimension) {
+  for(i8_t i = 0; i < dimension; ++i) {
+    for(i8_t j = 0; j < dimension; ++j) {
+      board.matrix[i][j] = '-';
     }
   }
+}*/
 
-  return matrix;
-}
-
-/**/
-int isEmpty(int row, int column, char **matrix) {
-  if (matrix[row][column] == '-') {
+int is_empty(board_t board, i8_t row, i8_t column) {
+  if (board.matrix[row][column] == '-') {
     return 1;
   }
   return 0;
 }
 
-/*Esta função verifica se o jogador representado pelo caractere playerCharacther ganhou em alguma linha da matriz.*/
-int verifyRows(int dimension, char **matrix, char playerCharacther) {
-  int win;
+int verify_rows(board_t board, i8_t dimension, char playerCharacther) {
+  i8_t win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
-    for (int j = 0; j < dimension; ++j) {
-      if (matrix[i][j] != playerCharacther) {
+    for (i8_t j = 0; j < dimension; ++j) {
+      if (board.matrix[i][j] != playerCharacther) {
         win = 0;
         break;
       }
@@ -55,14 +38,13 @@ int verifyRows(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou em alguma coluna da matriz.*/
-int verifyColumns(int dimension, char **matrix, char playerCharacther) {
-  int win;
+int verify_columns(board_t board, i8_t dimension, char playerCharacther) {
+  i8_t win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
-    for (int j = 0; j < dimension; ++j) {
-      if (matrix[j][i] != playerCharacther) {
+    for (i8_t j = 0; j < dimension; ++j) {
+      if (board.matrix[j][i] != playerCharacther) {
         win = 0;
         break;
       }
@@ -74,13 +56,12 @@ int verifyColumns(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou na diagonal principal da matriz.*/
-int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
-  int win;
+int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
+  i8_t win;
 
-  for (int i = 0; i < dimension; ++i) {
+  for (i8_t i = 0; i < dimension; ++i) {
     win = 1;
-    if (matrix[i][i] != playerCharacther) {
+    if (board.matrix[i][i] != playerCharacther) {
       win = 0;
       break;
     }
@@ -91,12 +72,11 @@ int verifyMainDiagonal(int dimension, char **matrix, char playerCharacther) {
   return 0;
 }
 
-/*Esta função verifica se o jogador ganhou na diagonal secundária da matriz.*/
-int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther) {
-  int win = 1;
+int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther) {
+  i8_t win = 1;
 
-  for (int i = 0; i < dimension; ++i) {
-    if (matrix[i][dimension - 1 - i] != playerCharacther) {
+  for (i8_t i = 0; i < dimension; ++i) {
+    if (board.matrix[i][dimension - 1 - i] != playerCharacther) {
       win = 0;
       break;
     }
@@ -107,11 +87,45 @@ int verifySecundaryDiagonal(int dimension, char **matrix, char playerCharacther)
   return 0;
 }
 
-/*Função para imprimir a matriz no terminal (somente para a fase de testes iniciais)*/
-void showMatrix(int dimension, char **matrix) {
-  for (int i = 0; i<dimension; i++) {
-    for (int j; j<dimension; j++) {
-      printf("%c \n", matrix[i][j]);
+void run_game(board_t board, i8_t turns, i8_t* coordinates) {
+
+  char current_player = '-';
+  i8_t free_position = is_empty(board, *coordinates, *(coordinates + 1));
+  
+  for(i8_t i = 0; i < turns; ++i) {
+    
+    if(turns % 2 == 0) {
+      current_player = 'O';
+    }
+    else {
+      current_player = 'X';
+    }
+
+    if(current_player == 'X') {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'X';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
+    }
+    else {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'O';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
     }
   }
 }
