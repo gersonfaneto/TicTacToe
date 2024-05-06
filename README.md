@@ -8,6 +8,8 @@
 ```
 <div align="center">
 <h1> Problema #1 - Jogo da Velha </h1>
+</div>
+
 <div align="center">
 
 </div>
@@ -28,6 +30,7 @@
 - [Referências](#referências)
 
 ## Introdução
+
 
 
 ## License
