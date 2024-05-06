@@ -17,11 +17,13 @@ TARGET = $(BUILD_DIR)/bin/$(TARGET_NAME)
 
 # Files to be included in the compilation.
 SOURCES_WITH_HEADERS = \
+											 src/common/algorithm.c \
 											 src/app/mouse.c \
 											 src/app/window.c \
 											 src/app/handlers.c \
 											 src/common/termctl.c \
-											 src/common/algorithm.c \
+											 src/app/appearance.c\
+
 
 # Directories to be included in the compilation.
 INCLUDE_DIRS = \
@@ -84,7 +86,8 @@ $(OBJ_DIR)/%.o: %.c
 build: $(TARGET) ## Compiles the project.
 
 run: $(TARGET) ## Runs the project with `root` permissions.
-	sudo @./$^
+	#sudo @./$^
+	sudo ./build/bin/game
 
 clean: ## Remove all files generated in the compilation.
 	@rm -rf $(BUILD_DIR)
