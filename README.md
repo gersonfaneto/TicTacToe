@@ -6,6 +6,29 @@
                             | | | | (__ | | (_| | (__ | | (_) |  __/
                             |_| |_|\___||_|\__,_|\___||_|\___/ \___|
 ```
+<div align="center">
+<h1> Problema #1 - Jogo da Velha </h1>
+<div align="center">
+
+</div>
+
+> Documentação do projeto da disciplina TEC 499 - Sistemas Digitais, de desenvolvimento em linguagem C do clássico Jogo da Velha.
+
+## Índice
+
+- [Introdução](#introdução)
+- [Hardware utilizado](#hardware-utilizado)
+- [Documentação utilizada](#documentação-utilizada)
+- [Desenvolvimento](#desenvolvimento)
+- [Resultados](#resultados)
+- [Testes](#testes)
+- [Conclusão](#conclusão) 
+- [Tutor](#tutor)
+- [Equipe](#equipe)
+- [Referências](#referências)
+
+## Introdução
+
 
 ## License
 
