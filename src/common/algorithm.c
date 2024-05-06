@@ -2,23 +2,25 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "state.h"
 
+/*
 void init_matrix(board_t board, i8_t dimension) {
   for(i8_t i = 0; i < dimension; ++i) {
     for(i8_t j = 0; j < dimension; ++j) {
       board.matrix[i][j] = '-';
     }
   }
-}
+}*/
 
-int isEmpty(board_t board, i8_t row, i8_t column) {
+int is_empty(board_t board, i8_t row, i8_t column) {
   if (board.matrix[row][column] == '-') {
     return 1;
   }
   return 0;
 }
 
-int verifyRows(board_t board, i8_t dimension, char playerCharacther) {
+int verify_rows(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -36,7 +38,7 @@ int verifyRows(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verifyColumns(board_t board, i8_t dimension, char playerCharacther) {
+int verify_columns(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -54,7 +56,7 @@ int verifyColumns(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verifyMainDiagonal(board_t board, i8_t dimension, char playerCharacther) {
+int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -70,7 +72,7 @@ int verifyMainDiagonal(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verifySecundaryDiagonal(board_t board, i8_t dimension, char playerCharacther) {
+int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win = 1;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -85,3 +87,45 @@ int verifySecundaryDiagonal(board_t board, i8_t dimension, char playerCharacther
   return 0;
 }
 
+void run_game(board_t board, i8_t turns, i8_t* coordinates) {
+
+  char current_player = '-';
+  i8_t free_position = is_empty(board, *coordinates, *(coordinates + 1));
+  
+  for(i8_t i = 0; i < turns; ++i) {
+    
+    if(turns % 2 == 0) {
+      current_player = 'O';
+    }
+    else {
+      current_player = 'X';
+    }
+
+    if(current_player == 'X') {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'X';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
+    }
+    else {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'O';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
+    }
+  }
+}

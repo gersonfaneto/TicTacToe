@@ -8,7 +8,7 @@
 void init_matrix(board_t board, i8_t dimension);
 
 
-int isEmpty(board_t board, i8_t row, i8_t column);
+int is_empty(board_t board, i8_t row, i8_t column);
 
 /*** 
 * This function checks if the player represented by the character 'playerCharacther' has won in any row of the matrix.
@@ -17,7 +17,7 @@ int isEmpty(board_t board, i8_t row, i8_t column);
 * @param playerCharacther The character representing the player.
 * @return 1 if the player has won, otherwise 0.
 */
-int verifyRows(board_t board, i8_t dimension, char playerCharacther);
+int verify_rows(board_t board, i8_t dimension, char playerCharacther);
 
 /*** 
 * This function checks if the player has won in any column of the matrix.
@@ -26,7 +26,7 @@ int verifyRows(board_t board, i8_t dimension, char playerCharacther);
 * @param playerCharacther The character representing the player.
 * @return 1 if the player has won, otherwise 0.
 */
-int verifyColumns(board_t board, i8_t dimension, char playerCharacther);
+int verify_columns(board_t board, i8_t dimension, char playerCharacther);
 
 /**
  * Verifies if the player has won in the main diagonal of the matrix.
@@ -35,7 +35,7 @@ int verifyColumns(board_t board, i8_t dimension, char playerCharacther);
  * @param playerCharacther The character representing the player.
  * @return Returns 1 if the player has won in the main diagonal, otherwise returns 0.
  */
-int verifyMainDiagonal(board_t board, i8_t dimension, char playerCharacther);
+int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther);
 
 /**
  * Verifies if the player has won in the secondary diagonal of the matrix.
@@ -44,6 +44,6 @@ int verifyMainDiagonal(board_t board, i8_t dimension, char playerCharacther);
  * @param playerCharacther The character representing the player.
  * @return Returns 1 if the player has won in the secondary diagonal, otherwise returns 0.
  */
-int verifySecundaryDiagonal(board_t board, i8_t dimension, char playerCharacther);
+int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther);
 
 #endif  // !ALGORITHM_H_

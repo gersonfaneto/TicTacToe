@@ -16,9 +16,10 @@ board_t init_board() {
     quadrant_t quadrant = init_quadrant();
     board_t board;
 
-    init_matrix(board, DIMENSION);
+    //init_matrix(board, DIMENSION);
 
     return (board_t) {
+        .matrix = {{'-','-','-'}, {'-','-','-'}, {'-','-','-'}},
         .row0 = (state.window.rows * 0.5) - (quadrant.height * 1.5),
         .row1 = (state.window.rows * 0.5) - (quadrant.height * 0.5),
         .row2 = (state.window.rows * 0.5) + (quadrant.height * 0.5),
@@ -40,24 +41,28 @@ void show_board(i8_t dimension, board_t board) {
         for (i8_t j = 0; j < dimension; ++j) {
             if (board.matrix[i][j] == '-') {
 
+                printf_at_xy(array_cols[i] + 2, array_rows[j], "  ___  ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 1, " / _ \\ ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 2, "| | | |");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 3, "| |_| |");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 4, " \\___/ ");
+
+            } else if (board.matrix[i][j] == 'X') {
+
+                printf_at_xy(array_cols[i] + 2, array_rows[j], "__  __ ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 1, "\\ \\/ / ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 2, " \\  /  ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 3, " /  \\  ");
+                printf_at_xy(array_cols[i] + 2, array_rows[j] + 4, "/_/\\_\\ ");
+
+            } else {
+
                 printf_at_xy(array_cols[i] + 2, array_rows[j], "       ");
                 printf_at_xy(array_cols[i] + 2, array_rows[j] + 1, "       ");
                 printf_at_xy(array_cols[i] + 2, array_rows[j] + 2, "       ");
                 printf_at_xy(array_cols[i] + 2, array_rows[j] + 3, "       ");
                 printf_at_xy(array_cols[i] + 2, array_rows[j] + 4, "       ");
 
-            } else if (board.matrix[i][j] == 'x') {
-                printf_at_xy(array_cols[i] + 2, array_rows[j], "__  __ ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 1, "\\ \\/ / ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 2, " \\  /  ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 3, " /  \\  ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 4, "/_/\\_\\ ");
-            } else {
-                printf_at_xy(array_cols[i] + 2, array_rows[j], "  ___  ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 1, " / _ \\ ");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 2, "| | | |");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 3, "| |_| |");
-                printf_at_xy(array_cols[i] + 2, array_rows[j] + 4, " \\___/ ");
             }
         }
     }

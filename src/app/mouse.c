@@ -67,12 +67,19 @@ i8_t* get_mouse(i8_t mouse_x, i8_t mouse_y, board_t board) {
 
     i8_t* array = malloc(2 * sizeof(int8_t));
 
-    if (mouse_x >= board.col0 && mouse_x <= board.col3 && mouse_y >= board.row0 && mouse_y <= board.row3) {
-        array[0] = (mouse_y - board.row0) / ((board.row3 - board.row0) / 3);
-        array[1] = (mouse_x - board.col0) / ((board.col3 - board.col0) / 3);
-        return array;
+    if (array == NULL) {
+        perror("Erro ao alocar memória");
+        exit(EXIT_FAILURE);
     }
 
-    free(array);
-    return NULL;
+    if (mouse_x >= board.col0 && mouse_x <= board.col3 && mouse_y >= board.row0 && mouse_y <= board.row3) {
+      array[0] = (mouse_y - board.row0) / ((board.row3 - board.row0) / 3);
+      array[1] = (mouse_x - board.col0) / ((board.col3 - board.col0) / 3);
+    }
+    else {
+      array[0] = -1;
+      array[1] = -1;
+    }
+
+    return array;
 }
