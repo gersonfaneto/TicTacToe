@@ -41,8 +41,17 @@ Não obstante, outro ponto para esclarecimento será a utilização dos botões 
 
 ## Hardware Utilizado
 
-O hardware utilizado para 
+O hardware programável utilizado para o projeto foi a placa de desenvolvimento DE1-SoC, projetada em torno do FPGA System-on-Chip (SoC) da Altera. Este SoC combina núcleos Cortex-A9 dual-core com lógica programável. O sistema inclui um processador rígido (HPS) baseado em ARM, periféricos e interfaces de memória integradas ao FPGA.
 
+![Imagem da DE1-SoC](https://www.terasic.com.tw/attachment/archive/836/image/top45_01.jpg)
+
+### Especificações FPGA
+
+Categoria|Especificações|
+|--------|-------|
+|CPU|
+|GPU|
+|Memória|64MB (32Mx16) SDRAM|
 ## License
 
 Released under [MIT][license-url] by:
@@ -50,6 +59,9 @@ Released under [MIT][license-url] by:
 - [Gerson Ferreira dos Anjos Neto][@gersonfaneto]
 - [Nathielle Cerqueira Alves][@NathielleA]
 - [Yasmin Cordeiro de Souza Meira][@yasmincsme]
+
+## Referências
+- [Site da Placa](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
 
 <!-- prettier-ignore-start -->
 
