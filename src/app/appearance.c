@@ -34,6 +34,27 @@ void show_board(i8_t dimension, board_t board) {
     i8_t array_cols[] = {board.col0, board.col1, board.col2, board.col3};
     i8_t array_rows[] = {board.row0, board.row1, board.row2, board.row3};
 
+    printf_at_xy(board.col0, board.row0 + 0, "          _           _          ");
+    printf_at_xy(board.col0, board.row0 + 1, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row0 + 2, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row0 + 3, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row0 + 4, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row1 + 0, "  _____  | |  _____  | |  _____  ");
+    printf_at_xy(board.col0, board.row1 + 1, " |_____| | | |_____| | | |_____| ");
+    printf_at_xy(board.col0, board.row1 + 2, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row1 + 3, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row1 + 4, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row2 + 0, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row2 + 1, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row2 + 2, "  _____  | |  _____  | |  _____  ");
+    printf_at_xy(board.col0, board.row2 + 3, " |_____| | | |_____| | | |_____| ");
+    printf_at_xy(board.col0, board.row2 + 4, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row3 + 0, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row3 + 1, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row3 + 2, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row3 + 3, "         | |         | |         ");
+    printf_at_xy(board.col0, board.row3 + 4, "         |_|         |_|         ");
+
     for (i8_t i = 0; i < dimension; ++i) {
         for (i8_t j = 0; j < dimension; ++j) {
 
