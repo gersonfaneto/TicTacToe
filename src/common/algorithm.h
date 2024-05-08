@@ -46,4 +46,6 @@ int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther);
  */
 int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther);
 
+void run_game(board_t* board, i8_t turns, i8_t* coordinates);
+
 #endif  // !ALGORITHM_H_
