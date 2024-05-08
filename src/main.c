@@ -11,6 +11,7 @@
 state_t state;
 board_t board;
 
+/*
 int main(void) {
   state.is_running = 1;
 
@@ -44,6 +45,84 @@ int main(void) {
     run_game(&board, 9, coordinates);
 
     printf_at_xy(0, 10, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
+    show_board(DIMENSION, board);
+
+    printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
+
+    state.mouse.read(&state.mouse, state.window.rows, state.window.cols);
+  }
+
+  exit_alt_screen();
+  enable_cursor();
+  enable_echo();
+
+  close(state.mouse.fd);
+
+  printf("Closing...\n");
+
+  return 0;
+}
+*/
+
+int main(void) {
+  state.is_running = 1;
+
+  state.mouse = init_mouse();
+  state.window = init_window();
+
+  i8_t* coordinates; //armazena o endereço do array com as coordenadas
+  board = init_board();
+
+  set_handlers();
+
+  printf("Starting...\n");
+
+  enter_alt_screen();
+  disable_cursor();
+  disable_echo();
+
+  char current_player = 'X';
+
+  i8_t free_position;
+
+  while (state.is_running) {
+    clear_screen();
+
+    coordinates = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
+    free_position = is_empty(board, *coordinates, *(coordinates + 1));
+
+    if(current_player == 'X') {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'X';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
+      current_player = 'O';
+    }
+    else {
+      if(*coordinates == -1 && state.mouse.left) {
+        //Selecione uma posição dentro do tabuleiro
+      }
+      else if(*coordinates != -1 && state.mouse.left) {
+        if(free_position) {
+          board.matrix[*coordinates][*(coordinates + 1)] = 'O';
+        }
+        else {
+          //Escolha uma casa livre
+        }
+      }
+      current_player = 'X';
+    }
+
+    //run_game(&board, 9, coordinates);
+
+    //printf_at_xy(0, 10, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
     show_board(DIMENSION, board);
 
     printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
