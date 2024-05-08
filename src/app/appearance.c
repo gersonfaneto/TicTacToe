@@ -29,31 +29,28 @@ board_t init_board() {
     };
 }
 
+void show_title(board_t board) {
+
+    //Exibindo o título do jogo no terminal
+    printf_at_xy(board.col0 - 2, board.row0 - 8, "_____ _     _____         _____          ");
+    printf_at_xy(board.col0 - 2, board.row0 - 7, "|_   _(_) __|_   _|_ _  __|_   _|__   ___ ");
+    printf_at_xy(board.col0 - 2, board.row0 - 6, "  | | | |/ __|| |/ _` |/ __|| |/ _ \\ / _ \\");
+    printf_at_xy(board.col0 - 2, board.row0 - 5, "  | | | | (__ | | (_| | (__ | | (_) |  __/");
+    printf_at_xy(board.col0 - 2, board.row0 - 4, "  |_| |_|\\___||_|\\__,_|\\___||_|\\___/ \\___|");
+
+    //*Os números nas funções printf são apenas para dimensionar os elementos no terminal
+}
+
+void show_player_turn(board_t board) {
+
+    //Exibindo de qual jogador é a vez
+    printf_at_xy(board.col0 + 10, board.row0 - 1, "Vez do Jogador");
+}
+
 void show_board(i8_t dimension, board_t board) {
     
     i8_t array_cols[] = {board.col0, board.col1, board.col2, board.col3};
     i8_t array_rows[] = {board.row0, board.row1, board.row2, board.row3};
-
-    printf_at_xy(board.col0, board.row0 + 0, "          _           _          ");
-    printf_at_xy(board.col0, board.row0 + 1, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row0 + 2, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row0 + 3, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row0 + 4, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row1 + 0, "  _____  | |  _____  | |  _____  ");
-    printf_at_xy(board.col0, board.row1 + 1, " |_____| | | |_____| | | |_____| ");
-    printf_at_xy(board.col0, board.row1 + 2, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row1 + 3, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row1 + 4, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row2 + 0, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row2 + 1, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row2 + 2, "  _____  | |  _____  | |  _____  ");
-    printf_at_xy(board.col0, board.row2 + 3, " |_____| | | |_____| | | |_____| ");
-    printf_at_xy(board.col0, board.row2 + 4, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row3 + 0, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row3 + 1, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row3 + 2, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row3 + 3, "         | |         | |         ");
-    printf_at_xy(board.col0, board.row3 + 4, "         |_|         |_|         ");
 
     for (i8_t i = 0; i < dimension; ++i) {
         for (i8_t j = 0; j < dimension; ++j) {
@@ -61,30 +58,36 @@ void show_board(i8_t dimension, board_t board) {
 
             if (board.matrix[i][j] == 'O') {
 
-                printf_at_xy(array_cols[j] + 2, array_rows[i], "  ___  ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, " / _ \\ ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, "| | | |");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, "| |_| |");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, " \\___/ ");
+                printf_at_xy(array_cols[j] + 2, array_rows[i], "___________");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, "|   ___   |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, "|  / _ \\  |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, "| | | | | |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, "| | |_| | |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 5, "|  \\___/  |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 6, "___________");
+                
 
             } else if (board.matrix[i][j] == 'X') {
 
-                printf_at_xy(array_cols[j] + 2, array_rows[i], "__  __ ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, "\\ \\/ / ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, " \\  /  ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, " /  \\  ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, "/_/\\_\\ ");
+                printf_at_xy(array_cols[j] + 2, array_rows[i], "___________");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, "| __  __  |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, "| \\ \\/ /  |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, "|  \\  /   |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, "|  /  \\   |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 5, "| /_/\\_\\  |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 6, "___________");
 
             } else {
 
-                printf_at_xy(array_cols[j] + 2, array_rows[i], "       ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, "       ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, "       ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, "       ");
-                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, "       ");
+                printf_at_xy(array_cols[j] + 2, array_rows[i], "___________");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 1, "|         |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 2, "|         |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 3, "|         |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 4, "|         |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 5, "|         |");
+                printf_at_xy(array_cols[j] + 2, array_rows[i] + 6, "___________");
 
             }
         }
     }
 }
-
