@@ -13,14 +13,14 @@ void init_matrix(board_t board, i8_t dimension) {
   }
 }*/
 
-int is_empty(board_t board, i8_t row, i8_t column) {
+i8_t is_empty(board_t board, i8_t row, i8_t column) {
   if (board.matrix[row][column] == '-') {
     return 1;
   }
   return 0;
 }
 
-int verify_rows(board_t board, i8_t dimension, char playerCharacther) {
+i8_t verify_rows(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -38,7 +38,7 @@ int verify_rows(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verify_columns(board_t board, i8_t dimension, char playerCharacther) {
+i8_t verify_columns(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -56,7 +56,7 @@ int verify_columns(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
+i8_t verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -72,7 +72,7 @@ int verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
   return 0;
 }
 
-int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther) {
+i8_t verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther) {
   i8_t win = 1;
 
   for (i8_t i = 0; i < dimension; ++i) {
@@ -87,45 +87,13 @@ int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacth
   return 0;
 }
 
-void run_game(board_t* board, i8_t turns, i8_t* coordinates) {
-
-  char current_player = '-';
-  i8_t free_position = is_empty(*board, *coordinates, *(coordinates + 1));
-  
-  for(i8_t i = 0; i < turns; ++i) {
-    
-    if(turns % 2 == 0) {
-      current_player = 'O';
-    }
-    else {
-      current_player = 'X';
-    }
-
-    if(current_player == 'X') {
-      if(*coordinates == -1 && state.mouse.left) {
-        //Selecione uma posição dentro do tabuleiro
-      }
-      else if(*coordinates != -1 && state.mouse.left) {
-        if(free_position) {
-          (*board).matrix[*coordinates][*(coordinates + 1)] = 'X';
-        }
-        else {
-          //Escolha uma casa livre
-        }
-      }
-    }
-    else {
-      if(*coordinates == -1 && state.mouse.left) {
-        //Selecione uma posição dentro do tabuleiro
-      }
-      else if(*coordinates != -1 && state.mouse.left) {
-        if(free_position) {
-          (*board).matrix[*coordinates][*(coordinates + 1)] = 'O';
-        }
-        else {
-          //Escolha uma casa livre
-        }
-      }
-    }
+i8_t check_win(board_t* board, i8_t dimension, char playerCharacter) {
+  if(verify_rows(*board, dimension, playerCharacter) ||
+     verify_columns(*board, dimension, playerCharacter) ||
+     verify_main_diagonal(*board, dimension, playerCharacter) ||
+     verify_secundary_diagonal(*board, dimension, playerCharacter)) {
+      return 1;
   }
+  return 0;
 }
+
