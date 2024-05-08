@@ -36,6 +36,8 @@ int main(void) {
     printf_at_xy(0, 3, "Clicks :: [%d, %d, %d]", state.mouse.left, state.mouse.middle, state.mouse.right);
 
     coordinates = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
+    show_title(board);
+    show_player_turn(board);
     show_board(DIMENSION, board);
 
     printf_at_xy(0, 4, "[%d, %d]", *coordinates, *(coordinates + 1));
