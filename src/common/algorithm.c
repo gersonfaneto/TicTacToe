@@ -87,10 +87,10 @@ int verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacth
   return 0;
 }
 
-void run_game(board_t board, i8_t turns, i8_t* coordinates) {
+void run_game(board_t* board, i8_t turns, i8_t* coordinates) {
 
   char current_player = '-';
-  i8_t free_position = is_empty(board, *coordinates, *(coordinates + 1));
+  i8_t free_position = is_empty(*board, *coordinates, *(coordinates + 1));
   
   for(i8_t i = 0; i < turns; ++i) {
     
@@ -107,7 +107,7 @@ void run_game(board_t board, i8_t turns, i8_t* coordinates) {
       }
       else if(*coordinates != -1 && state.mouse.left) {
         if(free_position) {
-          board.matrix[*coordinates][*(coordinates + 1)] = 'X';
+          (*board).matrix[*coordinates][*(coordinates + 1)] = 'X';
         }
         else {
           //Escolha uma casa livre
@@ -120,7 +120,7 @@ void run_game(board_t board, i8_t turns, i8_t* coordinates) {
       }
       else if(*coordinates != -1 && state.mouse.left) {
         if(free_position) {
-          board.matrix[*coordinates][*(coordinates + 1)] = 'O';
+          (*board).matrix[*coordinates][*(coordinates + 1)] = 'O';
         }
         else {
           //Escolha uma casa livre

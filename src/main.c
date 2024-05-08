@@ -36,12 +36,15 @@ int main(void) {
     printf_at_xy(0, 3, "Clicks :: [%d, %d, %d]", state.mouse.left, state.mouse.middle, state.mouse.right);
 
     coordinates = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
+    //show_board(DIMENSION, board);
+
+    //printf_at_xy(0, 4, "[%d, %d]", *coordinates, *(coordinates + 1));
+    printf_at_xy(0, 5, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
+
+    run_game(&board, 9, coordinates);
+
+    printf_at_xy(0, 10, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
     show_board(DIMENSION, board);
-
-    printf_at_xy(0, 4, "[%d, %d]", *coordinates, *(coordinates + 1));
-    printf_at_xy(0, 5, "%c", board.matrix[0][0]);
-
-    run_game(board, 9, coordinates);
 
     printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
 
