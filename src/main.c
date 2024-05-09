@@ -77,12 +77,10 @@ int main(void) {
 
     if(out_of_board) {
       out_of_board_error(board);
-      //out_of_board = 0;
     }
 
     if(invalid_posicion) {
       invalid_posicion_error(board);
-      //invalid_posicion = 0;
     }
 
     printf_at_xy(0, 0, "win: %d", win);
