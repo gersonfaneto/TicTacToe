@@ -29,17 +29,6 @@ board_t init_board() {
     };
 }
 
-void show_contour(i8_t dimension, board_t board, quadrant_t quadrant) {
-
-    i8_t array_cols[] = {board.col0, board.col1, board.col2, board.col3};
-
-    for(i8_t i = 0; i == dimension ; ++i) {
-        for(i8_t j = board.row0; j < (3 * quadrant.height + board.row0); ++j) {
-            printf_at_xy(j, array_cols[i], "|");
-        }
-    }
-}
-
 void show_board(i8_t dimension, board_t board) {
     
     i8_t array_cols[] = {board.col0, board.col1, board.col2, board.col3};
@@ -48,7 +37,7 @@ void show_board(i8_t dimension, board_t board) {
     for (i8_t i = 0; i < dimension; ++i) {
         for (i8_t j = 0; j < dimension; ++j) {
 
-            show_contour(dimension, board, init_quadrant());
+            //show_contour(dimension, board, init_quadrant());
 
             if (board.matrix[i][j] == 'O') {
 
@@ -82,13 +71,9 @@ void show_board(i8_t dimension, board_t board) {
 
 void out_of_board_error(board_t board) {
     printf_at_xy(state.window.cols * 0.5, state.window.cols, "<<Select a posicion inside the board>>");
-    //printf_at_xy(state.window.cols *0.5, state.)
 }
 
 void invalid_posicion_error(board_t board) {
     printf_at_xy(state.window.cols * 0.5, state.window.cols, "<<Choose an empty space>>");
 }
 
-//void invalid_position_error(i8_t) {
-
-//}
