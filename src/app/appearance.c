@@ -80,3 +80,16 @@ void show_board(i8_t dimension, board_t board) {
     }
 }
 
+void out_of_board_error(board_t board) {
+    //clear_screen();
+    printf_at_xy(state.window.cols * 0.5, state.window.cols, "<<Select a posicion inside the board>>");
+}
+
+void invalid_posicion_error(board_t board) {
+    //clear_screen();
+    printf_at_xy(state.window.cols * 0.5, state.window.cols, "<<Choose an empty space>>");
+}
+
+//void invalid_position_error(i8_t) {
+
+//}
