@@ -46,7 +46,6 @@ int main(void) {
     if(!win) {
 
       if(*coordinates == -1 && state.mouse.left) {
-        //out_of_board_error(board);
         out_of_board = 1;
         invalid_posicion = 0;
       }
@@ -54,20 +53,24 @@ int main(void) {
         out_of_board = 0;
         if(!free_position) {
           invalid_posicion = 1;
-          //invalid_posicion_error(board);
         }
         else {
           invalid_posicion = 0;
           if(current_player == 'X') {
+
             board.matrix[*coordinates][*(coordinates + 1)] = 'X';
-            win = check_win(&board, DIMENSION, 'X');
+            win = check_win(board, DIMENSION, 'X');
             current_player = 'O';
+
           }
           else {
+
             board.matrix[*coordinates][*(coordinates + 1)] = 'O';
-            win = check_win(&board, DIMENSION, 'O');
+            win = check_win(board, DIMENSION, 'O');
             current_player = 'X';
+
           }
+          win = check_tie(board, DIMENSION) ? 1 : win;
         }
       }
     }
