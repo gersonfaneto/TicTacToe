@@ -31,4 +31,8 @@ board_t init_board();
  */
 void show_board(i8_t dimension, board_t board);
 
+void out_of_board_error(board_t board);
+
+void invalid_posicion_error(board_t board);
+
 #endif  // !APPEARANCE_H_
