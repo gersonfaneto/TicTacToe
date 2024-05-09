@@ -24,6 +24,8 @@ struct board_t{
 
 board_t init_board();
 
+void show_contour(i8_t dimension, board_t board);
+
 /**
  * Prints the matrix in the terminal.
  * @param dimension The dimension of the matrix.
