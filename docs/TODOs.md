@@ -10,6 +10,5 @@
 
 - [ ] Projetar o algoritmo identificação e análise das jogadas.
 
-- Descobrir pq a função run_game n modifica a matriz definida na main
+- Acertar lógica da finalização do jogo, as mensagens continuam aparecendo mesmo depois do tabuleiro completo no caso de empate
 
-- Descobrir pq a função init_matrix não está criando a matriz
