@@ -32,10 +32,12 @@ int main(void) {
 
   i8_t free_position;
 
-  i8_t win;
+  i8_t win = 0;
 
   i8_t out_of_board = 0;
   i8_t invalid_posicion = 0;
+
+  i8_t change_board = 0;
 
   while (state.is_running) {
     clear_screen();
@@ -59,6 +61,7 @@ int main(void) {
           if(current_player == 'X') {
 
             board.matrix[*coordinates][*(coordinates + 1)] = 'X';
+            change_board = 1;
             win = check_win(board, DIMENSION, 'X');
             current_player = 'O';
 
@@ -66,6 +69,7 @@ int main(void) {
           else {
 
             board.matrix[*coordinates][*(coordinates + 1)] = 'O';
+            change_board = 1;
             win = check_win(board, DIMENSION, 'O');
             current_player = 'X';
 
@@ -75,6 +79,8 @@ int main(void) {
       }
     }
 
+    clear_screen();
+
     if(out_of_board) {
       out_of_board_error(board);
     }
@@ -83,18 +89,22 @@ int main(void) {
       invalid_posicion_error(board);
     }
 
-    printf_at_xy(0, 0, "win: %d", win);
+    if(change_board) {
+      show_board(DIMENSION, board);
+    }
+
+    show_contour(DIMENSION, board);
+
+    //printf_at_xy(0, 0, "win: %d", win);
     //run_game(&board, 9, coordinates);
-
-    printf_at_xy(0, 10, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
-    show_board(DIMENSION, board);
-
-
+    //printf_at_xy(0, 10, "%c, %c, %c\n%c, %c, %c\n%c, %c, %c", board.matrix[0][0], board.matrix[0][1], board.matrix[0][2], board.matrix[1][0], board.matrix[1][1], board.matrix[1][2], board.matrix[2][0], board.matrix[2][1], board.matrix[2][2]);
+    
     printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
 
     state.mouse.read(&state.mouse, state.window.rows, state.window.cols);
   }
 
+  //show_title();
   exit_alt_screen();
   enable_cursor();
   enable_echo();
