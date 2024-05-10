@@ -10,7 +10,6 @@
 state_t state;
 board_t board;
 
-
 int main(void) {
 
   init_game(&board);
@@ -82,19 +81,17 @@ int main(void) {
       init_message();
     }
     else {
+      show_contour(DIMENSION, board);
       if(out_of_board) {
         out_of_board_error();
       }
-
       if(invalid_position) {
         invalid_position_error();
       }
-
       if(change_board) {
         show_board(DIMENSION, board);
       }
 
-    
       if(check_tie(board, DIMENSION)) {
         show_tie();
         retry_message();
@@ -112,8 +109,6 @@ int main(void) {
           show_players(current_player);
         }
       }
-      
-      show_contour(DIMENSION, board);
     }
     
     print_mouse();
