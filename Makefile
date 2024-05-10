@@ -44,6 +44,7 @@ HEADERS = \
 					src/config.h \
 					src/utils/ui.h \
 					src/common/types.h \
+					#intelfpgaup/KEY.h \
 
 # Files (*.c or *.h) to be ignored in the `format` target.
 IGNORE_FILES_FORMAT =
@@ -66,7 +67,7 @@ WFLAGS += -Wno-unused-parameter -Wno-unused-variable \
 # Flags to be passed in the compilation and linking process, respectively.
 CFLAGS = -std=c99
 CFLAGS += $(WFLAGS) $(addprefix -I, $(INCLUDE_DIRS))
-LDFLAGS = $(addprefix -I, $(INCLUDE_DIRS))
+LDFLAGS = $(addprefix -I, $(INCLUDE_DIRS)) -lintelfpgaup
 
 help: ## Show all the available targets.
 	@echo "Available targets:"
@@ -76,12 +77,12 @@ help: ## Show all the available targets.
 $(TARGET): $(OBJECTS) $(HEADERS)
 	@echo $(OBJECTS)
 	@mkdir -p $(dir $@)
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $^ -o $@ $(LDFLAGS)
 
 # Compilation...
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $^
+	$(CC) -c -o $@ $^ $(CFLAGS)
 
 build: $(TARGET) ## Compiles the project.
 
