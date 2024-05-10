@@ -109,6 +109,39 @@ void show_players(board_t board, char currentPlayer) {
     }
 }
 
+void show_victory_X() {
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 20, "  ____  _                        __  __           _           ");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 19, " |  _ \\| | __ _ _   _  ___ _ __  \\ \\/ / __      _(_)_ __  ___ ");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 18, " | |_) | |/ _` | | | |/ _ \\ '__|  \\  /  \\ \\ /\\ / / | '_ \\/ __|");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 17, " |  __/| | (_| | |_| |  __/ |     /  \\   \\ V  V /| | | | \\__ \\");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 16, " |_|   |_|\\__,_|\\__, |\\___|_|    /_/\\_\\   \\_/\\_/ |_|_| |_|___/");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 15, "                |___/                                          ");
+}
+
+void show_victory_O() {
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 20, "  ____  _                          ___             _           ");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 19, " |  _ \\| | __ _ _   _  ___ _ __   / _ \\  __      _(_)_ __  ___ ");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 18, " | |_) | |/ _` | | | |/ _ \\ '__| | | | | \\ \\ /\\ / / | '_ \\/ __|");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 17, " |  __/| | (_| | |_| |  __/ |    | |_| |  \\ V  V /| | | | \\__ \\");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 16, " |_|   |_|\\__,_|\\__, |\\___|_|     \\___/    \\_/\\_/ |_|_| |_|___/");
+    printf_at_xy((state.window.cols * 0.5) - 31, (state.window.rows * 0.5) - 15, "                |___/                                           ");
+}
+
+void show_button() {
+    printf_at_xy((state.window.cols * 0.5) - 15, (state.window.rows * 0.5) + 15, "<<Press B2 to play again>>");
+    printf_at_xy((state.window.cols * 0.5) - 15, (state.window.rows * 0.5) + 15, "<<Press B1 to exit>>");
+}
+
+void show_tie() {
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 20, " _____ _      _ ");
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 19, "|_   _(_) ___| |");
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 18, "  | | | |/ _ \\ |");
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 17, "  | | | |  __/_|");
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 16, "  |_| |_|\\___(_)"); 
+    printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 15, "                  ");
+}
+
+
 void out_of_board_error(board_t board) {
     printf_at_xy((state.window.cols * 0.5) - 22, (state.window.rows * 0.5) + 15, "<<Choose a position within the game board>>");
 }
