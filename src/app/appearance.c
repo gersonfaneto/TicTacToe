@@ -141,12 +141,25 @@ void show_tie() {
     printf_at_xy((state.window.cols * 0.5) - 8, (state.window.rows * 0.5) - 15, "                  ");
 }
 
+void init_message() {
+    printf_at_xy((state.window.cols * 0.5) - 36, (state.window.rows * 0.5) - 2, "____________           ________                 ________                ");
+    printf_at_xy((state.window.cols * 0.5) - 36, (state.window.rows * 0.5) - 1, "___  __/__(_)______    ___  __/_____ _______    ___  __/__________      ");
+    printf_at_xy((state.window.cols * 0.5) - 36, (state.window.rows * 0.5), "__  /  __  /_  ___/    __  /  _  __ `/  ___/    __  /  _  __ \\  _ \\     ");
+    printf_at_xy((state.window.cols * 0.5) - 36, (state.window.rows * 0.5) + 1, "_  /   _  / / /__      _  /   / /_/ // /__      _  /   / /_/ /  __/     ");
+    printf_at_xy((state.window.cols * 0.5) - 36, (state.window.rows * 0.5) + 2, "/_/    /_/  \\___/      /_/    \\__,_/ \\___/      /_/    \\____/\\___/      ");
+
+    printf_at_xy((state.window.cols * 0.5) - 10, (state.window.rows * 0.5) + 15, "<<Press B1 to begin>>");
+}
+
+void retry_message() {
+    printf_at_xy((state.window.cols * 0.5) - 12, (state.window.rows * 0.5) + 15, "<<Press B1 to go back>>");
+}
 
 void out_of_board_error(board_t board) {
     printf_at_xy((state.window.cols * 0.5) - 22, (state.window.rows * 0.5) + 15, "<<Choose a position within the game board>>");
 }
 
-void invalid_posicion_error(board_t board) {
+void invalid_position_error(board_t board) {
     printf_at_xy((state.window.cols * 0.5) - 15, (state.window.rows * 0.5) + 15, "<<Select an unoccupied spot>>");
 }
 
