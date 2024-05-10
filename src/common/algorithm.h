@@ -6,6 +6,18 @@
 #include "app/appearance.h"
 
 /**
+ * Initializes the game by setting up the initial board state.
+ *
+ * @param board A pointer to the structure representing the game board.
+ */
+void init_game(board_t *board);
+
+/**
+ * Closes the game by performing necessary cleanup operations.
+ */
+void close_game(void);
+
+/**
  * Checks if a specific position on the board is empty.
  *
  * @param board The structure representing the game board.
@@ -43,6 +55,12 @@ i8_t check_win(board_t board, i8_t dimension, char playerCharacter);
  */
 i8_t check_tie(board_t board, i8_t dimension);
 
+/**
+ * Changes the state of the game.
+ *
+ * @param state The current state of the game.
+ * @param button The button pressed by the player.
+ */
 void change_state(i8_t *state, i8_t *button);
 
 #endif  // !ALGORITHM_H_
