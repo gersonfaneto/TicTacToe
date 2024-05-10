@@ -52,6 +52,41 @@ Categoria|Especificações|
 |CPU|
 |GPU|
 |Memória|64MB (32Mx16) SDRAM|
+
+## Desenvolvimento
+
+Iniciou-se o desenvolvimento do projeto do Jogo da Velha com uma análise detalhada dos requisitos para determinar o que seria necessário para conectar o mouse ao jogo e detectar seus movimentos pelo terminal. Como foi idealizado, cada jogada deveria ser capturada por um mouse conectado à placa DE1-SoC, o que exigiu uma abordagem cuidadosa para integrar o hardware e o software de maneira eficaz.
+
+### Conexão remota com a placa DE1-SoC
+
+Com relação à conexão com a placa, foi estabelecida via SSH (Secure Shell), um protocolo de rede que permite acesso remoto a sistemas Linux. Isso possibilitou o controle e monitoramento do jogo a partir de um computador externo, simplificando o processo de desenvolvimento e depuração.
+
+O  Secure  Shell  oferece  ao  usuário  a  capacidade  de  conectar-se  remotamente  a outro computador com segurança, pois os dados utilizados na rede serão criptografados. O protocolo SSH tem como principal finalidade o login remoto, porém pode ser utilizado  como  túnel  criptográfico  para  outros  propósitos,  como  copiar  arquivos, proteção de conexões de e-mail e execução de programas remotos.
+
+Um servidor SSH permite que vários clientes SSH conectem-se a ele. O cliente precisa conhecer o endereço IP (ou hostname) do servidor (nesse caso, o IP da placa utilizada) e a porta em que está escutando. O cliente se autentica para acessar a sessão. O processo de conexão ocorre em três etapas: o cliente envia uma solicitação de autenticação para o servidor e recebe uma chave de host. O servidor determina se o cliente pode se conectar, verificando as credenciais fornecidas. Se o cliente for autenticado e autorizado, a sessão SSH é estabelecida entre os dois hosts.
+
+### Detectando o mouse
+
+Para obter os eventos do mouse, exploramos o sistema de arquivos do Linux, especialmente o arquivo "mice". Esse arquivo é parte do subsistema de entrada do Linux e fornece uma interface para acessar os eventos gerados pelos dispositivos de entrada, como o mouse. Ao ler o arquivo "mice", nosso programa pode capturar informações sobre movimentos do mouse, cliques e outras interações do usuário em tempo real.
+
+Uma das principais responsabilidades de um sistema operacional é gerenciar os dispositivos de entrada e saída (E/S). Isso inclui enviar comandos aos dispositivos, lidar com interrupções, tratar possíveis erros e fornecer uma interface para que os programas possam acessar esses dispositivos por meio de chamadas de sistema (system calls) para leitura e gravação.
+
+O sistema de E/S do Linux segue uma abordagem semelhante à de outros sistemas UNIX. Os drivers de dispositivos são apresentados aos usuários como  arquivos regulares, a fim de abstrair o resto do sistema ou o usuário das particularidades do hardware, simplificando essa interação. Assim, o acesso a um dispositivo é feito da mesma maneira que a abertura de um arquivo. Porém, estes arquivos que fornecem acesso a um dispositivo são denominados de arquivos especiais e estão associados a um diretório que se encontra dentro de /dev (no Linux, diretórios são tratados como arquivos). Esses arquivos especiais são vinculados aos drivers de dispositivo correspondentes.
+
+Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesma forma que nos arquivos normais. No entanto, em dispositivos como alto-falantes, apenas a escrita é permitida, enquanto em dispositivos como mouses, apenas a leitura é possível.
+
+Com relação a essa etapa do desenvolvimento, a modularização do código foi crucial para garantir uma organização clara e eficiente. O código foi separado em funções distintas, cada uma responsável por uma parte específica do processo. Como exemplo, foram criadas funções separadas para inicializar o mouse, ler eventos do mouse e interpretar esses eventos para determinar as ações do jogador no jogo, entre outros.
+
+### Construção da lógica do jogo
+
+Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
+
+A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse e à aparência do tabuleiro e outros elementos do jogo no modo texto do terminal.
+
+Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
+
+Com isso, o projeto do Jogo da Velha foi concluído, fornecendo uma experiência de jogo interativa e envolvente, onde os jogadores podem competir entre si em um ambiente de terminal.
+
 ## License
 
 Released under [MIT][license-url] by:
@@ -62,6 +97,7 @@ Released under [MIT][license-url] by:
 
 ## Referências
 - [Site da Placa](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
+- https://periodicos.unesc.net/ojs/index.php/sulcomp/article/view/304/311
 
 <!-- prettier-ignore-start -->
 
