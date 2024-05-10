@@ -40,7 +40,7 @@ int main(void) {
   i8_t change_board = 0;
 
   while (state.is_running) {
-    clear_screen();
+    //clear_screen();
 
     coordinates = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
     free_position = is_empty(board, *coordinates, *(coordinates + 1));
@@ -91,11 +91,26 @@ int main(void) {
 
     if(change_board) {
       show_board(DIMENSION, board);
-      show_players(board, current_player);
     }
 
+   
+    if(check_tie(board, DIMENSION)) {
+      show_tie();
+      //show_players(board, current_player);
+    }
+    else {
+      if(win && current_player == 'O') {
+        show_victory_X();
+      }
+      else if(win && current_player == 'X') {
+        show_victory_O();
+      }
+      else {
+        show_players(board, current_player);
+      }
+    }
+    
     show_contour(DIMENSION, board);
-
 
     //printf_at_xy(0, 0, "win: %d", win);
     //run_game(&board, 9, coordinates);
