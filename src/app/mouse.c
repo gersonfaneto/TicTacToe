@@ -8,7 +8,6 @@
 #include <unistd.h>
 
 #include "config.h"
-// #include "state.h"
 #include "appearance.h"
 #include "state.h"
 
