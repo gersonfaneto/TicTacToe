@@ -41,10 +41,14 @@ void show_tie();
  */
 void show_board(i8_t dimension, board_t board);
 
+void retry_message(void);
+
 //void show_title();
 
 void out_of_board_error(board_t board);
 
-void invalid_posicion_error(board_t board);
+void invalid_position_error(board_t board);
+
+void init_message(void);
 
 #endif  // !APPEARANCE_H_
