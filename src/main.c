@@ -2,7 +2,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "app/handlers.h"
 #include "common/termctl.h"
 #include "state.h"
 #include "app/appearance.h"
@@ -11,37 +10,21 @@
 state_t state;
 board_t board;
 
+
 int main(void) {
+
+  init_game(&board);
   
-  state.is_running = 1;
-
-  i8_t state_game = 0;
-
-  state.mouse = init_mouse();
-  state.window = init_window();
-
-  i8_t* coordinates; //armazena o endereço do array com as coordenadas
-  board = init_board();
-
-  set_handlers();
-
-  printf("Starting...\n");
-
-  enter_alt_screen();
-  disable_cursor();
-  disable_echo();
+  i8_t* coordinates;
 
   char current_player = 'X';
-
+  
+  i8_t state_game = 0;
   i8_t free_position;
-
-  i8_t win = 0;
-
+  i8_t win;
   i8_t out_of_board = 0;
   i8_t invalid_position = 0;
-
   i8_t change_board = 0;
-
   i8_t signal_retry = 0;
 
   while (state.is_running) {
@@ -49,11 +32,7 @@ int main(void) {
     if(state_game == 0) {
       win = 0;
       current_player = 'X';
-      for(i8_t i = 0; i < DIMENSION; ++i) {
-        for(i8_t j = 0; j < DIMENSION; ++j) {
-          board.matrix[i][j] = '-';
-        }
-      }  
+      board = init_board();
       change_state(&state_game, &state.mouse.right);
     }
     else if (state_game == 1) {
@@ -104,11 +83,11 @@ int main(void) {
     }
     else {
       if(out_of_board) {
-        out_of_board_error(board);
+        out_of_board_error();
       }
 
       if(invalid_position) {
-        invalid_position_error(board);
+        invalid_position_error();
       }
 
       if(change_board) {
@@ -130,25 +109,15 @@ int main(void) {
           retry_message();
         }
         else {
-          show_players(board, current_player);
+          show_players(current_player);
         }
       }
       
       show_contour(DIMENSION, board);
     }
     
-    printf_at_xy(state.mouse.x, state.mouse.y, "%c\n", '@');
-
-    state.mouse.read(&state.mouse, state.window.rows, state.window.cols);
+    print_mouse();
   }
 
-  exit_alt_screen();
-  enable_cursor();
-  enable_echo();
-
-  close(state.mouse.fd);
-
-  printf("Closing...\n");
-
-  return 0;
+  close_game();
 }
