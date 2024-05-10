@@ -24,7 +24,15 @@ struct board_t{
 
 board_t init_board();
 
+void show_players(board_t board, char currentPlayer);
+
 void show_contour(i8_t dimension, board_t board);
+
+void show_victory_X();
+
+void show_victory_O();
+
+void show_tie();
 
 /**
  * Prints the matrix in the terminal.
