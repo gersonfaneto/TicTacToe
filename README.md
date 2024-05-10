@@ -22,7 +22,10 @@
 - [Hardware utilizado](#hardware-utilizado)
 - [Documentação utilizada](#documentação-utilizada)
 - [Desenvolvimento](#desenvolvimento)
-- [Resultados](#resultados)
+  - [Conexão remota com a placa DE1-SoC](#conexão-remota-com-a-placa-de1-soc)
+  - [Detectando o mouse](#detectando-o-mouse)
+  - [Construção da lógica do jogo](#construção-da-lógica-do-jogo)
+- [## Jogabilidade e Resultados](#jogabilidade-e-resultados)
 - [Testes](#testes)
 - [Conclusão](#conclusão) 
 - [Tutor](#tutor)
@@ -85,7 +88,19 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
-Com isso, o projeto do Jogo da Velha foi concluído, fornecendo uma experiência de jogo interativa e envolvente, onde os jogadores podem competir entre si em um ambiente de terminal.
+Sendo assim, o projeto do Jogo da Velha foi concluído, sendo captados então os resultados obtidos através dos testes realizados e fornecendo uma experiência de jogo interativa e realista, onde os jogadores podem competir entre si em um ambiente de terminal.
+
+## Jogabilidade e Resultados
+
+
+
+## Testes
+
+
+
+## Conclusão 
+
+
 
 ## License
 
@@ -98,6 +113,7 @@ Released under [MIT][license-url] by:
 ## Referências
 - [Site da Placa](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
 - https://periodicos.unesc.net/ojs/index.php/sulcomp/article/view/304/311
+- https://www.fct.unesp.br/Home/Departamentos/Cartografia/uel---sistemas_operacionais_sistemas_linux.pdf
 
 <!-- prettier-ignore-start -->
 
