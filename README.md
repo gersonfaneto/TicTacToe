@@ -59,6 +59,10 @@ Categoria|Especificações|
 |GPU|
 |Memória|64MB (32Mx16) SDRAM|
 
+## Documentação utilizada
+
+## Arquitetura
+
 ## Desenvolvimento
 
 Iniciou-se o desenvolvimento do projeto do Jogo da Velha com uma análise detalhada dos requisitos para determinar o que seria necessário para conectar o mouse ao jogo e detectar seus movimentos pelo terminal. Como foi idealizado, cada jogada deveria ser capturada por um mouse conectado à placa DE1-SoC, o que exigiu uma abordagem cuidadosa para integrar o hardware e o software de maneira eficaz.
@@ -87,9 +91,11 @@ Com relação a essa etapa do desenvolvimento, a modularização do código foi 
 
 Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
 
-Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal
+Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
-A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse e à aparência do tabuleiro e outros elementos do jogo no modo texto do terminal.
+A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal. 
+
+A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse e à aparência do tabuleiro e outros elementos do jogo no modo texto do terminal.  
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
@@ -125,9 +131,18 @@ Algumas etapas são nescessárias para a conexão via terminal com o kit de dese
 
 ## Jogabilidade
 
+O Jogo da Velha possui uma jogabilidade simples e rápida de compreender.
 
 ### Como jogar
+
+Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas.
+
+Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse jogo, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para colocar a marca na célula selecionada.
+
+O objetivo é conseguir três marcas iguais em linha antes do adversário. Se todas as células do tabuleiro forem preenchidas e nenhum jogador conseguir formar uma linha, o jogo termina em empate.
+
 ### Resultados
+
 
 
 ## Testes
