@@ -90,6 +90,25 @@ void show_board(i8_t dimension, board_t board) {
     }
 }
 
+void show_players(board_t board, char currentPlayer) {
+    if(currentPlayer == 'O') {
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 20, "       ____  _                        __  __        __    ____  _                          ___  ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 19, "      |  _ \\| | __ _ _   _  ___ _ __  \\ \\/ /        \\ \\  |  _ \\| | __ _ _   _  ___ _ __   / _ \\ ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 18, "      | |_) | |/ _` | | | |/ _ \\ '__|  \\  /          \\ \\ | |_) | |/ _` | | | |/ _ \\ '__| | | | |");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 17, "      |  __/| | (_| | |_| |  __/ |     /  \\          / / |  __/| | (_| | |_| |  __/ |    | |_| |");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 16, "      |_|   |_|\\__,_|\\__, |\\___|_|    /_/\\_\\        /_/  |_|   |_|\\__,_|\\__, |\\___|_|     \\___/ ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 15, "                     |___/                                              |___/                   ");
+    }
+    else {
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 20, " __    ____  _                        __  __              ____  _                          ___  ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 19, " \\ \\  |  _ \\| | __ _ _   _  ___ _ __  \\ \\/ /             |  _ \\| | __ _ _   _  ___ _ __   / _ \\ ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 18, "  \\ \\ | |_) | |/ _` | | | |/ _ \\ '__|  \\  /              | |_) | |/ _` | | | |/ _ \\ '__| | | | |");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 17, "  / / |  __/| | (_| | |_| |  __/ |     /  \\              |  __/| | (_| | |_| |  __/ |    | |_| |");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 16, " /_/  |_|   |_|\\__,_|\\__, |\\___|_|    /_/\\_\\             |_|   |_|\\__,_|\\__, |\\___|_|     \\___/ ");
+        printf_at_xy((state.window.cols * 0.5) - 48, (state.window.rows * 0.5) - 15, "                     |___/                                              |___/                   ");
+    }
+}
+
 void out_of_board_error(board_t board) {
     printf_at_xy((state.window.cols * 0.5) - 22, (state.window.rows * 0.5) + 15, "<<Choose a position within the game board>>");
 }
@@ -97,4 +116,6 @@ void out_of_board_error(board_t board) {
 void invalid_posicion_error(board_t board) {
     printf_at_xy((state.window.cols * 0.5) - 15, (state.window.rows * 0.5) + 15, "<<Select an unoccupied spot>>");
 }
+
+
 
