@@ -25,7 +25,10 @@
   - [Conexão remota com a placa DE1-SoC](#conexão-remota-com-a-placa-de1-soc)
   - [Detectando o mouse](#detectando-o-mouse)
   - [Construção da lógica do jogo](#construção-da-lógica-do-jogo)
-- [## Jogabilidade e Resultados](#jogabilidade-e-resultados)
+- [Inicializando o projeto do jogo](#inicializando-o-projeto-do-jogo)
+- [Jogabilidade](#jogabilidade)
+  - [Como jogar](#como-jogar)
+  - [Resultados](#resultados)
 - [Testes](#testes)
 - [Conclusão](#conclusão) 
 - [Tutor](#tutor)
@@ -84,14 +87,47 @@ Com relação a essa etapa do desenvolvimento, a modularização do código foi 
 
 Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
 
+Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal
+
 A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse e à aparência do tabuleiro e outros elementos do jogo no modo texto do terminal.
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
 Sendo assim, o projeto do Jogo da Velha foi concluído, sendo captados então os resultados obtidos através dos testes realizados e fornecendo uma experiência de jogo interativa e realista, onde os jogadores podem competir entre si em um ambiente de terminal.
 
-## Jogabilidade e Resultados
+## Inicializando o projeto do jogo
 
+Algumas etapas são nescessárias para a conexão via terminal com o kit de desenvolvimento DE1-SoC, compilação do código de execução e a inicialização do projeto:
+
+1. Abrir o terminal;
+
+2. Comando para conexão via SSH:
+  ```bash
+    ssh usuario@id_da_placa
+  ```
+
+3. Colocar a senha de acesso;
+
+4. Abrir a pasta onde está localizado o projeto:
+  ```bash
+  cd diretório_do_projeto
+  ```
+
+5. Compilar o projeto, a partir do Makefile, com o comando:
+  ```bash
+  make build
+  ```
+
+6. Iniciar o projeto com o comando:
+  ```bash
+  make run
+  ```
+
+## Jogabilidade
+
+
+### Como jogar
+### Resultados
 
 
 ## Testes
