@@ -43,4 +43,6 @@ i8_t check_win(board_t board, i8_t dimension, char playerCharacter);
  */
 i8_t check_tie(board_t board, i8_t dimension);
 
+void change_state(i8_t *state, i8_t *button);
+
 #endif  // !ALGORITHM_H_
