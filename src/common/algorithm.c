@@ -68,3 +68,27 @@ i8_t check_tie(board_t board, i8_t dimension) {
   return 0;
 }
 
+void change_state(i8_t *state_game, i8_t *button) {
+
+  switch (*state_game) {
+    case 0:
+      if(*button == 1) {
+        *state_game = 1;
+      }
+      break;
+    
+    case 1:
+      if(*button == 1) {
+        *state_game = 0; 
+      }
+      else if(*button == 2) {
+        state.is_running = 0;
+      }
+      break;
+
+    default:
+      break;
+  }
+
+}
+
