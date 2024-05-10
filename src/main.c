@@ -91,9 +91,11 @@ int main(void) {
 
     if(change_board) {
       show_board(DIMENSION, board);
+      show_players(board, current_player);
     }
 
     show_contour(DIMENSION, board);
+
 
     //printf_at_xy(0, 0, "win: %d", win);
     //run_game(&board, 9, coordinates);
