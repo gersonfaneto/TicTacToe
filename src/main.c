@@ -6,11 +6,17 @@
 #include "state.h"
 #include "app/appearance.h"
 #include "common/algorithm.h"
+#include "intelfpgaup/KEY.h"
 
 state_t state;
 board_t board;
 
 int main(void) {
+
+  i8_t state_game = 0;
+  int button;
+  KEY_open();
+  KEY_read(&button);
 
   init_game(&board);
   
@@ -18,7 +24,7 @@ int main(void) {
 
   char current_player = 'X';
   
-  i8_t state_game = 0;
+  //i8_t state_game = 0;
   i8_t free_position;
   i8_t win;
   i8_t out_of_board = 0;
@@ -32,14 +38,19 @@ int main(void) {
       win = 0;
       current_player = 'X';
       board = init_board();
-      change_state(&state_game, &state.mouse.right);
-    }
+      KEY_read(&button);
+      change_state(&state_game, &button);
+    }  
     else if (state_game == 1) {
 
       coordinates = get_mouse(state.mouse.x, state.mouse.y, board); //Função que retorna o endereço de memória da array
       free_position = is_empty(board, *coordinates, *(coordinates + 1));
 
       if(!win) {
+        //print_mouse();
+
+      //KEY_read(&button);
+      //change_state(&state_game, &button);
 
         if(*coordinates == -1 && state.mouse.left) {
           out_of_board = 1;
@@ -72,15 +83,23 @@ int main(void) {
           }
         }
       }
-      change_state(&state_game, &state.mouse.right);
+      KEY_read(&button);
+      change_state(&state_game, &button);
     }
 
-    clear_screen();
+    //clear_screen();
 
     if(state_game == 0) {
+
+      if(win) {
+        clear_screen();
+      }
+
       init_message();
     }
-    else {
+    else if(state_game == 1){
+      //clear_screen();
+      //print_mouse();
       show_contour(DIMENSION, board);
       if(out_of_board) {
         out_of_board_error();
@@ -109,9 +128,12 @@ int main(void) {
           show_players(current_player);
         }
       }
+
+      if(!win) {
+        print_mouse();
+        clear_screen();
+      }
     }
-    
-    print_mouse();
   }
 
   close_game();
