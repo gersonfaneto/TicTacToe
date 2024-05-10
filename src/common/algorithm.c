@@ -2,8 +2,30 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "state.h"
+#include "app/handlers.h"
 
+void init_game(board_t *board) {
+  state.is_running = 1;
+  state.mouse = init_mouse();
+  state.window = init_window();
+  *board = init_board();
+
+  set_handlers();
+  printf("Starting...\n");
+  enter_alt_screen();
+  disable_cursor();
+  disable_echo();
+}
+
+void close_game(void) {
+  exit_alt_screen();
+  enable_cursor();
+  enable_echo();
+  close(state.mouse.fd);
+  printf("Closing...\n");
+}
 
 i8_t is_empty(board_t board, i8_t row, i8_t column) {
   if (board.matrix[row][column] == '-') {
