@@ -72,14 +72,53 @@ i8_t* get_mouse(i8_t mouse_x, i8_t mouse_y, board_t board) {
         exit(EXIT_FAILURE);
     }
 
-    if (mouse_x >= board.col0 && mouse_x <= board.col3 && mouse_y >= board.row0 && mouse_y <= board.row3) {
-      array[0] = (mouse_y - board.row0) / ((board.row3 - board.row0) / 3);
-      array[1] = (mouse_x - board.col0) / ((board.col3 - board.col0) / 3);
+    if(mouse_x >= board.col0 && mouse_x <= board.col3 && mouse_y >= board.row0 && mouse_y <= board.row3) {
+
+        if(mouse_x > board.col0 && mouse_x < board.col1 && mouse_y > board.row0 && mouse_y < board.row1) {
+            array[0] = 0;
+            array[1] = 0;
+        }
+        else if(mouse_x > board.col1 && mouse_x < board.col2 && mouse_y > board.row0 && mouse_y < board.row1) {
+            array[0] = 0;
+            array[1] = 1;
+        }
+        else if(mouse_x > board.col2 && mouse_x < board.col3 && mouse_y > board.row0 && mouse_y < board.row1) {
+            array[0] = 0;
+            array[1] = 2;
+        }
+        else if(mouse_x > board.col0 && mouse_x < board.col1 && mouse_y > board.row1 && mouse_y < board.row2) {
+            array[0] = 1;
+            array[1] = 0;
+        }
+        else if(mouse_x > board.col1 && mouse_x < board.col2 && mouse_y > board.row1 && mouse_y < board.row2) {
+            array[0] = 1;
+            array[1] = 1;
+        }
+        else if(mouse_x > board.col2 && mouse_x < board.col3 && mouse_y > board.row1 && mouse_y < board.row2) {
+            array[0] = 1;
+            array[1] = 2;
+        }
+        else if(mouse_x > board.col0 && mouse_x < board.col1 && mouse_y > board.row2 && mouse_y < board.row3) {
+            array[0] = 2;
+            array[1] = 0;
+        }
+        else if(mouse_x > board.col1 && mouse_x < board.col2 && mouse_y > board.row2 && mouse_y < board.row3) {
+            array[0] = 2;
+            array[1] = 1;
+        }
+        else if(mouse_x > board.col2 && mouse_x < board.col3 && mouse_y > board.row2 && mouse_y < board.row3) {
+            array[0] = 2;
+            array[1] = 2;
+        }
+        else {
+          array[0] = -1;
+          array[1] = -1;
+        }
     }
     else {
-      array[0] = -1;
-      array[1] = -1;
+        array[0] = -1;
+        array[1] = -1;
     }
 
-    return array;
+  return array;
 }
