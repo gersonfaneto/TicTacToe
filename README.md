@@ -75,7 +75,7 @@ Categoria|Especificações|
 |Portas USB| 2 portas USB Host, normal tipo A
 ---
 
-Dos periféricos da FPGA, utilizou-se apenas um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0).
+Dos periféricos da FPGA, utilizou-se apenas um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
 
 Nome|FPGA Pin No.|Description|I/O Standard|
 |--------|-------|--------|---------|
@@ -86,7 +86,7 @@ Nome|FPGA Pin No.|Description|I/O Standard|
 
 ## Documentação utilizada
 
-- Datasheet da DE-SoC: Esse documento contém as informações 
+> Datasheet da DE-SoC: Esse documento contém as informações 
 
 ## Arquitetura
 
@@ -112,8 +112,8 @@ O sistema de E/S do Linux segue uma abordagem semelhante à de outros sistemas U
 
 Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesma forma que nos arquivos normais. No entanto, em dispositivos como alto-falantes, apenas a escrita é permitida, enquanto em dispositivos como mouses, apenas a leitura é possível. O caminho do arquivo utilizado no projeto para realizar essa leitura foi:
 
-```bash
-  MOUSE_DEVICE_PATH "/dev/input/mice"
+```C
+  #include MOUSE_DEVICE_PATH "/dev/input/mice"
 ```
 - #### Modularização do código:
 
@@ -151,7 +151,7 @@ Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de 
 
 A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal.
 
-**
+**(imagens da visuaçização do jogo)
 
 - #### Lógica de funcionamento do jogo
 
@@ -163,11 +163,15 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
     <p> Figura . Fluxograma da lógica do jogo</p>
 </div>
 
-O jogo é iniciado na sua tela de *start* e, nesse momento, verifica-se o acionamento do botão. Se o jogo for iniciado (state_game = 1), o tabuleiro vazio é exibido e o primeiro jogador pode realizar a sua jogada, escolhendo a posição a partir do mouse. As coordenadas do mouse da posição escolhida são verificadas para saber se foram válidas ou não. Caso não sejam válidas - ou seja, o usuário clicou no lado de fora do tabuleiro - uma mensagem de erro é exibida. Se foram válidas, é feita uma segunda verificação, se a posição escolhida está vazia 
+O jogo é iniciado na sua tela de *start* e, nesse momento, verifica-se o acionamento do botão. Se o jogo for iniciado (*state_game = 1*), o tabuleiro vazio é exibido e o primeiro jogador pode realizar a sua jogada, escolhendo a posição a partir do mouse. 
 
-Já se o jogo não for iniciado (state_game = 0), 
+As coordenadas do mouse da posição escolhida são verificadas para saber se foram válidas ou não. Caso não sejam válidas - ou seja, o usuário clicou no lado de fora do tabuleiro - uma mensagem de erro é exibida. Se foram válidas, é feita uma segunda verificação, se a posição escolhida está vazia. Estando vazia a matriz é atualizada com a nova jogada, se estiver ocupada uma mensagem de erro aparece na tela.
 
-Quando o botão de iniciar ou encerrar o jogo for apertado, para que essas ações fossem executadas de forma instantânea no terminal, pensou-se em controlar esse processo com uma máquina de estados. Como mostrado no Diagrama de transição de estados da Figura, 
+Já se o jogo não for iniciado (*state_game = 0*), o menu inicial continua a ser exibido até que o botão seja acionado. E, nesse momento, as variáveis são reencetadas e a matriz do tabuleiro é iniciada, deixando todas as suas posições vazias.
+
+O estado do jogo é verificado a todo momento. Logo, quando o botão de iniciar ou encerrar o jogo for apertado, para que essas ações sejam executadas de forma instantânea no terminal, pensou-se em controlar esse processo com uma máquina de estados finito. 
+
+> Como mostrado no Diagrama de transição de estados da Figura, há duas situações do jogo: Parado e Rodando. Esses estados mudam de acordo com o pressionamento do botão, se mantendo no mesmo estado se o botão não for pressionado. A saída do estado Parado é *state_game = 0* e do estado Rodando é *state_game = 1*. Essas são as saídas da função que verifica o acionamento do botão.
 
 </p>
 <div align="center">
@@ -194,6 +198,10 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 7. **fcntl.h**: Esta biblioteca fornece acesso a funções para manipulação de descritores de arquivos. É utilizada para operações relacionadas a arquivos, como abrir, fechar e manipular descritores de arquivos.
 
 8. **signal.h**: Esta biblioteca fornece acesso a funções relacionadas ao tratamento de sinais no sistema. É utilizada para definir manipuladores de sinal para lidar com eventos específicos, como interrupções de teclado ou sinais de terminação. Utilizada para verificar se o sistema está rodando para que o jogo possa continuar ou para ser interrompido.
+
+- #### Compilação e Makefile
+
+
 ---
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
