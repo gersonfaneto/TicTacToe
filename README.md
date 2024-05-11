@@ -208,6 +208,7 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 - #### Compilação e Makefile
 
 
+
 ---
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
@@ -254,11 +255,7 @@ Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabulei
 
 O objetivo é conseguir três marcas iguais em linha antes do adversário. Se todas as células do tabuleiro forem preenchidas e nenhum jogador conseguir formar uma linha, o jogo termina em empate.
 
-### Resultados
-
-
-
-## Testes
+## Resultados e Testes
 
 No início da desenvolvimento do projeto, foram montados estudos de casos para auxiliarem no cumprimento dos requisitos e serem utilizados na etapa de teste. 
 
