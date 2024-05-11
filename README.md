@@ -49,7 +49,12 @@ Não obstante, outro ponto para esclarecimento será a utilização dos botões 
 
 O hardware programável utilizado para o projeto foi a placa de desenvolvimento DE1-SoC, projetada em torno do FPGA System-on-Chip (SoC) da Altera. Este SoC combina núcleos Cortex-A9 dual-core com lógica programável. O sistema inclui um processador rígido (HPS) baseado em ARM, periféricos e interfaces de memória integradas ao FPGA.
 
-![Imagem da DE1-SoC](https://www.terasic.com.tw/attachment/archive/836/image/top45_01.jpg)
+</p>
+<div align="center">
+   <img width="500px" src="resources\68747470733a2f2f7777772e746572617369632e636f6d2e74772f6174746163686d656e742f617263686976652f3833362f696d6167652f746f7034355f30312e6a7067-removebg-preview.png" />
+    <p> Figura 1. Kit de desenvolvimento DE1-SoC</p>
+</div>
+
 
 ### Especificações FPGA
 
@@ -91,9 +96,14 @@ Com relação a essa etapa do desenvolvimento, a modularização do código foi 
 
 ### Construção da lógica do jogo
 
-![Fluxograma da lógica do jogo](imgs\mermaid-diagram-2024-05-11-015756.svg)
-
 Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
+
+//**Exibir aqui o fluxograma da lógica do jogo e referenciar no texto
+</p>
+<div align="center">
+   <img width="800px" src="resources\mermaid-diagram-2024-05-11-015756.svg" />
+    <p> Figura . Fluxograma da lógica do jogo</p>
+</div>
 
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
