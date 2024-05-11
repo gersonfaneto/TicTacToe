@@ -37,17 +37,17 @@
 
 ## Introdução
 
-Este documento apresenta a documentação do projeto de um Jogo da Velha desenvolvido em linguagem C para ser executado em um ambiente de terminal, em modo texto, em sistema operacional Linux. O jogo foi implementado para permitir a interação de dois jogadores, utilizando um mouse conectado a uma das portas USB do Kit de desenvolvimento DE1-SoC, para que, a partir do mouse, cada um dos dois jogadores possa selecionar as posições no tabuleiro a cada jogada. 
+Este relatório visa apresentar a documentação do projeto que tem como objetivo desenvolver um Jogo da Velha desenvolvido programado em linguagem C para ser executado em um ambiente de terminal, em modo texto, em sistema operacional Linux. O jogo foi implementado para permitir a interação de dois jogadores, utilizando um mouse conectado a uma das portas USB do Kit de desenvolvimento DE1-SoC, para que, a partir do mouse, cada um dos dois jogadores possa selecionar as posições no tabuleiro a cada jogada. 
 
-Além disso, como auxílio, os botões disponíveis na placa foram utilizados para funções de controle, como iniciar e parar o jogo. Na próxima seção, serão discutidos os detalhes da implementação do jogo, incluindo a estrutura do código, as funções principais e os algoritmos utilizados para controlar o fluxo do jogo e validar as jogadas dos jogadores. 
+Nas seções seguintes, serão discutidos os detalhes da implementação do jogo, incluindo a estrutura do código, as funções principais e os algoritmos utilizados para controlar o fluxo do jogo e validar as jogadas dos jogadores. 
 
-Como também será abordado o processo de conexão do mouse ao terminal utilizando mapeamento de memória e a leitura de arquivos no sistema Linux. Incluindo informações sobre como o jogo detecta e processa os movimentos do mouse para permitir que os jogadores façam suas jogadas.
+Como também será abordado o processo de conexão do mouse ao terminal, incluindo informações sobre como o jogo detecta e processa os movimentos do mouse para permitir que os jogadores façam suas jogadas.
 
 Não obstante, outro ponto para esclarecimento será a utilização dos botões da placa para iniciar e parar o jogo, explicando como esses dispositivos foram integrados ao código e como são utilizados pelos jogadores durante a partida. Por fim, serão discutidos os testes e resultados obtidos do projeto, bem como os desafios encontrados durante o desenvolvimento e as respectivas soluções adotadas para superá-los.
 
 ## Hardware Utilizado
 
-O hardware programável utilizado para o projeto foi a placa de desenvolvimento DE1-SoC, projetada em torno do FPGA System-on-Chip (SoC) da Altera. Este SoC combina núcleos Cortex-A9 dual-core com lógica programável. O sistema inclui um processador rígido (HPS) baseado em ARM, periféricos e interfaces de memória integradas ao FPGA.
+O hardware programável utilizado para o projeto foi a placa de desenvolvimento DE1-SoC, projetada em torno do FPGA System-on-Chip (SoC) da Altera. Este SoC combina núcleos Cortex-A9 dual-core com lógica programável. O sistema inclui um processador rígido (HPS) baseado em ARM, periféricos e interfaces de memória integradas ao FPGA. A placa contém uma distribuição Linux embarcada.
 
 </p>
 <div align="center">
@@ -75,7 +75,7 @@ Categoria|Especificações|
 |Portas USB| 2 portas USB Host, normal tipo A
 ---
 
-Dos periféricos da FPGA, utilizou-se apenas um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
+Dos periféricos da FPGA, utilizou-se as portas USB para conectar o mouse e um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
 
 Nome|FPGA Pin No.|Description|I/O Standard|
 |--------|-------|--------|---------|
@@ -84,11 +84,17 @@ Nome|FPGA Pin No.|Description|I/O Standard|
 |KEY[2]| PIN_W15| Push-button[2]| 3.3V
 |KEY[3]| PIN_Y16| Push-button[3]| 3.3V
 
+*** Imagem dos componentes circulados utilizados da placa
+
 ## Documentação utilizada
 
-> Datasheet da DE-SoC: Esse documento contém as informações 
+> Datasheet da DE-SoC: Esse documento contém todas as informações relacionadas ao kit de desenvolvimento, incluindo os recursos e características de design da placa, instruções para seu uso e descrição dos periféricos. Além de fornecer exemplos de projetos avançados implementados na placa DE1-SoC, que abrangem os recursos dos periféricos conectados ao FPGA.
 
-## Arquitetura
+> Documento de orientação ao uso de Linux* em placas DE-series: Descreve uma versão do Linux* disponível para uma variedade de sistemas embarcados que apresentam um dispositivo Intel® Cyclone® V System-on-Chip (SoC). O documento mostra como o Linux pode ser armazenado em uma memória microSD* que pode ser inserida na placa DE1-SoC e inicializada pelo processador ARM. E também como podem ser desenvolvidos programas de software que rodam no processador ARM no Linux, e fazem uso dos recursos de hardware na placa DE1-SoC. Esses recursos incluem periféricos no Hard Processor System (HPS) e periféricos de hardware personalizados implementados no FPGA (Field-Programmable Gate Array) no dispositivo SoC.
+
+## Arquitetura do ARM Cortex-A9
+
+
 
 ## Desenvolvimento
 
@@ -271,7 +277,9 @@ Released under [MIT][license-url] by:
 ## Referências
 - [Site da Placa](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
 - https://periodicos.unesc.net/ojs/index.php/sulcomp/article/view/304/311
-- https://www.fct.unesp.br/Home/Departamentos/Cartografia/uel---sistemas_operacionais_sistemas_linux.pdf
+- https://www.fct.unesp.br/Home/Departamentos/Cartografia/uel---sistemas_operacionais_sistemas_linux.
+- https://www.kernel.org/doc/html/v4.18/input/index.html
+- Using Linux* on DE-series Board. For Quartus® Prime 21.1
 
 <!-- prettier-ignore-start -->
 
