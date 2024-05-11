@@ -24,7 +24,7 @@
 - [Desenvolvimento](#desenvolvimento)
   - [Conexão remota com a placa DE1-SoC](#conexão-remota-com-a-placa-de1-soc)
   - [Detectando o mouse](#detectando-o-mouse)
-  - [Construção da lógica do jogo](#construção-da-lógica-do-jogo)
+  - [Construção da lógica e exibição do jogo](#construção-da-lógica-e-exibição-do-jogo)
 - [Inicializando o projeto do jogo](#inicializando-o-projeto-do-jogo)
 - [Jogabilidade](#jogabilidade)
   - [Como jogar](#como-jogar)
@@ -51,7 +51,7 @@ O hardware programável utilizado para o projeto foi a placa de desenvolvimento 
 
 </p>
 <div align="center">
-   <img width="500px" src="resources\68747470733a2f2f7777772e746572617369632e636f6d2e74772f6174746163686d656e742f617263686976652f3833362f696d6167652f746f7034355f30312e6a7067-removebg-preview.png" />
+   <img width="500px" src="resources\DE1-SoC.png" />
     <p> Figura 1. Kit de desenvolvimento DE1-SoC</p>
 </div>
 
@@ -94,22 +94,41 @@ Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesm
 
 Com relação a essa etapa do desenvolvimento, a modularização do código foi crucial para garantir uma organização clara e eficiente. O código foi separado em funções distintas, cada uma responsável por uma parte específica do processo. Como exemplo, foram criadas funções separadas para inicializar o mouse, ler eventos do mouse e interpretar esses eventos para determinar as ações do jogador no jogo, entre outros.
 
-### Construção da lógica do jogo
+### Construção da lógica e exibição do jogo
 
-Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
+Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e conectar à lógica do funcionamento do jogo, a partir da detecção de qual quadrante foi escolhido por cada jogador.
 
-//**Exibir aqui o fluxograma da lógica do jogo e referenciar no texto
+- #### Identificação das coordenadas e exibição do tabuleiro
+
+É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões da placa.  Então, foi necessário tratar esse evento de movimento para determinar como o tabuleiro seria exibido no terminal.
+
+O terminal é dividido em colunas e linhas, onde cada elemento dessas posições é um caracter de texto. Portanto, ele pode ser interpretado como um gráfico cartesiano onde os valores do eixo x são as colunas e os valores do eixo y são as linhas. Ao fazer a primeira leitura do arquivo de entrada do mouse, a posição determinada como inicial é a coordenada central dessa janela. 
+
+A partir do conhecimento de quais são as coordenadas desse ponto central, foram determinados onde ficariam os extremos e pontos do tabuleiro do jogo, para serem ligados um ao outro formando a visualização dessa matriz, como mostrado na Figura a seguir.
+
+</p>
+<div align="center">
+   <img width="380px" src="resources\tabNumbers.png" />
+    <p> Figura . Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central</p>
+</div>
+
+Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro.
+
+Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
+
+A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal. 
+
+- #### Lógica de funcionamento do jogo
+
+A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse, ao botão de iniciar e sair da partida e à aparência do tabuleiro.
+
 </p>
 <div align="center">
    <img width="800px" src="resources\mermaid-diagram-2024-05-11-015756.svg" />
     <p> Figura . Fluxograma da lógica do jogo</p>
 </div>
 
-Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
-
-A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal. 
-
-A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do jogo, onde os jogadores alternam entre colocar suas marcações (X ou O) em células vazias do tabuleiro na tentativa de formar uma linha horizontal, vertical ou diagonal. Essa lógica foi integrada à detecção de movimentos do mouse e à aparência do tabuleiro e outros elementos do jogo no modo texto do terminal.  
+//**Continuar e explicar o fluxograma
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
