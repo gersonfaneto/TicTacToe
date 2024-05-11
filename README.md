@@ -73,7 +73,16 @@ Categoria|Especificações|
 |Memória|1GB DDR3 SDRAM (barramento 32-bits)
 |Rede| 1 Gb Ethernet PHY com conector RJ45
 |Portas USB| 2 portas USB Host, normal tipo A
+---
 
+Dos periféricos da FPGA, utilizou-se apenas um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0).
+
+Nome|FPGA Pin No.|Description|I/O Standard|
+|--------|-------|--------|---------|
+|KEY[0]| PIN_AA14| Push-button[0]| 3.3V
+|KEY[1]| PIN_AA15| Push-button[1]| 3.3V
+|KEY[2]| PIN_W15| Push-button[2]| 3.3V
+|KEY[3]| PIN_Y16| Push-button[3]| 3.3V
 
 ## Documentação utilizada
 
@@ -140,7 +149,9 @@ Em seguida, na função de iniciar a matriz é armazenado a posição das quatro
 
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
-A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal. 
+A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal.
+
+**
 
 - #### Lógica de funcionamento do jogo
 
@@ -152,9 +163,38 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
     <p> Figura . Fluxograma da lógica do jogo</p>
 </div>
 
-//**Continuar e explicar o fluxograma
+O jogo é iniciado na sua tela de *start* e, nesse momento, verifica-se o acionamento do botão. Se o jogo for iniciado (state_game = 1), o tabuleiro vazio é exibido e o primeiro jogador pode realizar a sua jogada, escolhendo a posição a partir do mouse. As coordenadas do mouse da posição escolhida são verificadas para saber se foram válidas ou não. Caso não sejam válidas - ou seja, o usuário clicou no lado de fora do tabuleiro - uma mensagem de erro é exibida. Se foram válidas, é feita uma segunda verificação, se a posição escolhida está vazia 
 
+Já se o jogo não for iniciado (state_game = 0), 
 
+Quando o botão de iniciar ou encerrar o jogo for apertado, para que essas ações fossem executadas de forma instantânea no terminal, pensou-se em controlar esse processo com uma máquina de estados. Como mostrado no Diagrama de transição de estados da Figura, 
+
+</p>
+<div align="center">
+   <img width="600px" src="resources\state-machine-button.svg" />
+    <p> Figura . Diagrama de transição da máquina de estados para controle do acionamento do botão</p>
+</div>
+
+- #### Bibliotecas utilizadas
+
+O uso de bibliotecas auxiliaram diversos processos na implementação do sistema, algumas delas já são padrões da linguagem C, outras foram escolhidas por serem úteis em determinadas funções.
+
+1. **stdio.h**: Esta biblioteca fornece funcionalidades básicas de entrada e saída padrão.
+
+2. **string.h**: Esta biblioteca fornece funções para manipulação de strings. Ela é utilizada para operações relacionadas a strings, como comparação, concatenação e busca.
+
+3. **unistd.h**: Esta biblioteca fornece acesso a várias constantes e funções do sistema operacional relacionadas ao POSIX (Portable Operating System Interface). É utilizada para funções de sistema, como sleep(), que é usada para pausar a execução do programa por um determinado número de segundos.
+
+4. **intelfpgaup/KEY.h**: Biblioteca específica que fornece funcionalidades relacionadas ao hardware da placa Intel FPGA. Ela é utilizada para acessar os botões da placa, possibilitando a interação do usuário com o jogo.
+
+5. **sys/ioctl.h**: Realiza o fornecimento de funções para controle de dispositivos de E/S no sistema. É utilizada para realizar operações de controle sobre dispositivos de E/S.
+
+6. **errno.h**: Define a variável global errno, é usada para verificar e interpretar erros que ocorrem durante a execução do programa.
+
+7. **fcntl.h**: Esta biblioteca fornece acesso a funções para manipulação de descritores de arquivos. É utilizada para operações relacionadas a arquivos, como abrir, fechar e manipular descritores de arquivos.
+
+8. **signal.h**: Esta biblioteca fornece acesso a funções relacionadas ao tratamento de sinais no sistema. É utilizada para definir manipuladores de sinal para lidar com eventos específicos, como interrupções de teclado ou sinais de terminação. Utilizada para verificar se o sistema está rodando para que o jogo possa continuar ou para ser interrompido.
+---
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
