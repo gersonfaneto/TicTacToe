@@ -61,6 +61,8 @@ Categoria|Especificações|
 
 ## Documentação utilizada
 
+- Datasheet da DE-SoC: Esse documento contém as informações 
+
 ## Arquitetura
 
 ## Desenvolvimento
@@ -147,7 +149,7 @@ O objetivo é conseguir três marcas iguais em linha antes do adversário. Se to
 
 ## Testes
 
-
+No início da desenvolvimento do projeto, foram montados estudos de casos para auxiliarem no cumprimento dos requisitos e serem utilizados na etapa de teste. 
 
 ## Conclusão 
 
