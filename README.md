@@ -91,6 +91,8 @@ Com relação a essa etapa do desenvolvimento, a modularização do código foi 
 
 ### Construção da lógica do jogo
 
+![Fluxograma da lógica do jogo](imgs\mermaid-diagram-2024-05-11-015756.svg)
+
 Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e detectar qual quadrante foi escolhido por cada jogador. É importante notar que um único evento de hardware pode gerar múltiplos eventos de entrada, como um único movimento do mouse que pode resultar em eventos separados para movimentos nos eixos X e Y, além de eventos para pressionamento de botões.
 
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
