@@ -56,13 +56,24 @@ O hardware programável utilizado para o projeto foi a placa de desenvolvimento 
 </div>
 
 
-### Especificações FPGA
+### Principais Especificações FPGA
 
 Categoria|Especificações|
 |--------|-------|
-|CPU|
-|GPU|
-|Memória|64MB (32Mx16) SDRAM|
+|CPU| Altera Cyclone® V SE 5CSEMA5F31C6N
+|Memória|64MB SDRAM (barramento 16-bits)|
+|Portas USB| USB-Blaster II
+|Periféricos| 4 botões, 10 chaves, 10 LEDs vermelhos, display de 7 segmentos 
+---
+### Principais Especificações HPS
+
+Categoria|Especificações|
+|--------|-------|
+|CPU|800MHz Dual-core ARM Cortex-A9 MPCore
+|Memória|1GB DDR3 SDRAM (barramento 32-bits)
+|Rede| 1 Gb Ethernet PHY com conector RJ45
+|Portas USB| 2 portas USB Host, normal tipo A
+
 
 ## Documentação utilizada
 
