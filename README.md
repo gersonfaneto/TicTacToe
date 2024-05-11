@@ -101,11 +101,18 @@ Uma das principais responsabilidades de um sistema operacional é gerenciar os d
 
 O sistema de E/S do Linux segue uma abordagem semelhante à de outros sistemas UNIX. Os drivers de dispositivos são apresentados aos usuários como  arquivos regulares, a fim de abstrair o resto do sistema ou o usuário das particularidades do hardware, simplificando essa interação. Assim, o acesso a um dispositivo é feito da mesma maneira que a abertura de um arquivo. Porém, estes arquivos que fornecem acesso a um dispositivo são denominados de arquivos especiais e estão associados a um diretório que se encontra dentro de /dev (no Linux, diretórios são tratados como arquivos). Esses arquivos especiais são vinculados aos drivers de dispositivo correspondentes.
 
-Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesma forma que nos arquivos normais. No entanto, em dispositivos como alto-falantes, apenas a escrita é permitida, enquanto em dispositivos como mouses, apenas a leitura é possível.
+Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesma forma que nos arquivos normais. No entanto, em dispositivos como alto-falantes, apenas a escrita é permitida, enquanto em dispositivos como mouses, apenas a leitura é possível. O caminho do arquivo utilizado no projeto para realizar essa leitura foi:
+
+```bash
+  MOUSE_DEVICE_PATH "/dev/input/mice"
+```
+- #### Modularização do código:
 
 Com relação a essa etapa do desenvolvimento, a modularização do código foi crucial para garantir uma organização clara e eficiente. O código foi separado em funções distintas, cada uma responsável por uma parte específica do processo. Como exemplo, foram criadas funções separadas para inicializar o mouse, ler eventos do mouse e interpretar esses eventos para determinar as ações do jogador no jogo, entre outros.
 
-### Construção da lógica e exibição do jogo
+Nas pastas principais, em *src/app/* estão localizadas as funções para leitura dos eventos do mouse, para aparência do jogo e para manipulação das janelas do terminal. Em *src/common* estão as funções para a lógica do jogo, alias para tipagens e para controle da exibição de texto no terminal.
+
+### Implementação da lógica e exibição do jogo
 
 Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados para construir o tabuleiro do Jogo da Velha no terminal e conectar à lógica do funcionamento do jogo, a partir da detecção de qual quadrante foi escolhido por cada jogador.
 
@@ -119,11 +126,17 @@ A partir do conhecimento de quais são as coordenadas desse ponto central, foram
 
 </p>
 <div align="center">
-   <img width="380px" src="resources\tabNumbers.png" />
+   <img width="300px" src="resources\board-numbers.png" />
     <p> Figura . Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central</p>
 </div>
 
-Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro.
+Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro. Assim, foi possível posicionar e exibir os caracteres para formação do matriz do tabuleiro, como repesentado na figura a seguir.
+
+</p>
+<div align="center">
+   <img width="300px" src="resources\void-board.png" />
+    <p> Figura . Tabuleiro do Jogo</p>
+</div>
 
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
@@ -140,6 +153,8 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
 </div>
 
 //**Continuar e explicar o fluxograma
+
+
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
