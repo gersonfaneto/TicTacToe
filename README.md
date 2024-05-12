@@ -75,7 +75,7 @@ Categoria|Especificações|
 |Portas USB| 2 portas USB Host, normal tipo A
 ---
 
-Dos periféricos da FPGA, utilizou-se as portas USB para conectar o mouse e um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
+Dos periféricos da FPGA, utilizou-se a entrada de rede Ethernet para conexão remota, as portas USB para conectar o mouse e um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
 
 Nome|FPGA Pin No.|Description|I/O Standard|
 |--------|-------|--------|---------|
@@ -84,7 +84,11 @@ Nome|FPGA Pin No.|Description|I/O Standard|
 |KEY[2]| PIN_W15| Push-button[2]| 3.3V
 |KEY[3]| PIN_Y16| Push-button[3]| 3.3V
 
-*** Imagem dos componentes circulados utilizados da placa
+</p>
+<div align="center">
+   <img width="500px" src="resources\DE1-p.jpeg" />
+    <p> Figura 1. Periféricos utilizados do DE1-SoC</p>
+</div>
 
 ## Documentação utilizada
 
@@ -195,7 +199,13 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 
 3. **unistd.h**: Esta biblioteca fornece acesso a várias constantes e funções do sistema operacional relacionadas ao POSIX (Portable Operating System Interface). É utilizada para funções de sistema, como sleep(), que é usada para pausar a execução do programa por um determinado número de segundos.
 
-4. **intelfpgaup/KEY.h**: Biblioteca específica que fornece funcionalidades relacionadas ao hardware da placa Intel FPGA. Ela é utilizada para acessar os botões da placa, possibilitando a interação do usuário com o jogo.
+4. **intelfpgaup/XX.h**: Biblioteca específica que fornece funcionalidades relacionadas ao hardware da placa Intel FPGA. Ela é utilizada para acessar os botões da placa, possibilitando a interação do usuário com o jogo. O XX.h deve ser substituído pelo nome do driver a ser acessado, nesse caso o KEY.h, usado para acesso à porta dos botões da placa. Como representado na tabela a baixo, que informa os módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.
+
+</p>
+<div align="center">
+   <img width="400px" src="resources\kernel-modules.jpeg" />
+    <p> Figura . Módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.</p>
+</div>
 
 5. **sys/ioctl.h**: Realiza o fornecimento de funções para controle de dispositivos de E/S no sistema. É utilizada para realizar operações de controle sobre dispositivos de E/S.
 
@@ -207,13 +217,25 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 
 - #### Compilação e Makefile
 
+Um Makefile é um arquivo de configuração usado em projetos de desenvolvimento de software para automatizar o processo de compilação. Ele contém instruções sobre como o projeto deve ser compilado, quais arquivos fonte devem ser usados, quais opções de compilação devem ser aplicadas e como os arquivos gerados devem ser organizados.
 
+O Makefile é especialmente útil na linguagem C, onde é comum ter muitos arquivos fonte e dependências complexas entre eles. Ajudando a evitar a necessidade de compilar manualmente cada arquivo fonte e garantir que apenas os arquivos alterados sejam recompilados, economizando tempo e simplificando o processo de compilação.
+
+O Makefile fornecido no projeto possui como suas principais seções:
+
+- **Definições de variáveis**: Define variáveis para o compilador a ser usado, o nome do executável final, diretórios relacionados à compilação, entre outros.
+  
+- **Targets (Alvos)**: Define diferentes alvos para a compilação, como `build`, `run`, `clean`, `format`, etc. Cada alvo corresponde a uma tarefa específica a ser executada.
+  
+- **Regras de compilação**: Especifica como compilar os arquivos fonte em objetos e como vinculá-los para criar o executável final. Isso é feito por meio de regras que definem as dependências entre os arquivos e as ações necessárias para compilá-los.
+  
+- **Comandos auxiliares**: Fornece comandos auxiliares para executar tarefas adicionais, como formatação de código ou geração de banco de dados de compilação.
 
 ---
 
 Por fim, foram realizados ajustes finais para garantir que o jogo funcionasse corretamente, corrigindo quaisquer bugs ou problemas de desempenho que surgissem durante os testes.
 
-Sendo assim, o projeto do Jogo da Velha foi concluído, sendo captados então os resultados obtidos através dos testes realizados e fornecendo uma experiência de jogo interativa e realista, onde os jogadores podem competir entre si em um ambiente de terminal.
+Sendo assim, o projeto do Jogo da Velha foi concluído, sendo captados então os resultados obtidos através dos testes realizados e fornecendo uma experiência de jogo  onde os jogadores podem competir entre si em um ambiente de terminal.
 
 ## Inicializando o projeto do jogo
 
@@ -255,13 +277,19 @@ Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabulei
 
 O objetivo é conseguir três marcas iguais em linha antes do adversário. Se todas as células do tabuleiro forem preenchidas e nenhum jogador conseguir formar uma linha, o jogo termina em empate.
 
-## Resultados e Testes
+## Resultados e Conclusão 
 
-No início da desenvolvimento do projeto, foram montados estudos de casos para auxiliarem no cumprimento dos requisitos e serem utilizados na etapa de teste. 
+Nesta documentação, exploramos detalhadamente o desenvolvimento do projeto do Jogo da Velha, implementado em linguagem C para execução em um ambiente de terminal usando a placa DE1-SoC.
 
-## Conclusão 
+Indo deste de a análise dos requisitos do projeto, especificações da arquitetura e funcionamento da placa, destacando a integração do mouse como dispositivo de entrada e os controles utilizando os botões da placa, a conexão via SSH, utilização do sistema de arquivos do Linux para capturar os eventos do mouse, até a explicação da jogabilidade do jogo.
 
+É importante também, citar os principais desafios encontrados no decorrer do desenvolvimento, como: lidar com a exibição da interface do jogo em modo texto, saber como ler e captar corretamente as coordenadas do mouse e problemas de compilação.
 
+A seguir, as demonstrações dos testes finais realizados, seus respectivos resultados e exibindo o funcionamento real do jogo da velha desenvolvido:
+
+****GIFs do jogo
+
+Com este projeto, foi demonstrado a aplicação prática de conceitos de programação e integração de hardware e software. O Jogo da Velha implementado na placa DE1-SoC oferece uma maneira divertida e educativa de explorar as capacidades de programação e desenvolvimento de sistemas embarcados e ajuda na melhor compreensão da arquitetura de um computador.
 
 ## License
 
@@ -272,11 +300,17 @@ Released under [MIT][license-url] by:
 - [Yasmin Cordeiro de Souza Meira][@yasmincsme]
 
 ## Referências
-- [Site da Placa](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
+- [Datasheet da Placa DE1-SoC](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=836&PartNo=1#contents)
+
 - https://periodicos.unesc.net/ojs/index.php/sulcomp/article/view/304/311
+
 - https://www.fct.unesp.br/Home/Departamentos/Cartografia/uel---sistemas_operacionais_sistemas_linux.
+
 - https://www.kernel.org/doc/html/v4.18/input/index.html
-- Using Linux* on DE-series Board. For Quartus® Prime 21.1
+
+- [Using Linux* on DE-series Board. For Quartus® Prime 21.1](https://github.com/fpgacademy/Tutorials/releases/download/v21.1/Linux_with_ARM_A9.pdf)
+
+- https://learnxinyminutes.com/docs/make
 
 <!-- prettier-ignore-start -->
 
