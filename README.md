@@ -74,6 +74,13 @@ Categoria|Especificações|
 |Rede| 1 Gb Ethernet PHY com conector RJ45
 |Portas USB| 2 portas USB Host, normal tipo A
 ---
+### Periféricos utilizados
+
+</p>
+<div align="center">
+   <img width="500px" src="resources\DE1-p.jpeg" />
+    <p> Figura 1. Periféricos utilizados do DE1-SoC</p>
+</div>
 
 Dos periféricos da FPGA, utilizou-se a entrada de rede Ethernet para conexão remota, as portas USB para conectar o mouse e um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
 
@@ -84,21 +91,25 @@ Nome|FPGA Pin No.|Description|I/O Standard|
 |KEY[2]| PIN_W15| Push-button[2]| 3.3V
 |KEY[3]| PIN_Y16| Push-button[3]| 3.3V
 
-</p>
-<div align="center">
-   <img width="500px" src="resources\DE1-p.jpeg" />
-    <p> Figura 1. Periféricos utilizados do DE1-SoC</p>
-</div>
+
+
+### Arquitetura do ARM Cortex-A9
+
+O processador do kit de desenvolvimento é o ARM Cortex-A9 800MHz MPCore, possui a Arquitetura do Conjunto de Instruções (ISA) ARMv7. Por ser dual-core suporta multiprocessamento e recebe instruções por palavras com o comprimento de 32 bits.
+
+Embora o HPS e o FPGA possam operar de forma independente, eles são fortemente acoplados por meio de uma interconexão de sistema de alta largura de banda construída a partir de pontes de barramento de alto desempenho. Tanto a malha FPGA quanto o HPS podem acessar um ao outro por meio dessas pontes de interconexão.
+
+O processador ARM pode acessar o FPGA usando a ponte HPS para FPGA ou a ponte Lightweight HPS para FPGA. Essas pontes são mapeadas para regiões no espaço de memória do ARM. Quando um componente do lado do FPGA é conectado a uma dessas pontes, os registradores mapeados de memória do componente estão disponíveis para leitura e gravação pelo processador ARM na região de memória da ponte. Ou seja, essas pontes permitem que o processador solicite ou envie dados para a FPGA e também transferir os dados para a memória do HPS.
+
+O código em linguagem C, ao ser executado, se comunica com a placa FPGA. Programas executados no processador ARM no sistema operacional DE1-SoC-UP-Linux podem acessar periféricos de hardware que são implementados no FPGA.
+
+Esses dispositivos de entrada e saída conectados à placa são acessados na memória, pois são mapeados em diretórios específicos, a partir dos drivers que serão explicados na sessão de Desenvolvimento. Eles podem ser acessados por permissão concedida pelo Linux.
 
 ## Documentação utilizada
 
 > Datasheet da DE-SoC: Esse documento contém todas as informações relacionadas ao kit de desenvolvimento, incluindo os recursos e características de design da placa, instruções para seu uso e descrição dos periféricos. Além de fornecer exemplos de projetos avançados implementados na placa DE1-SoC, que abrangem os recursos dos periféricos conectados ao FPGA.
 
 > Documento de orientação ao uso de Linux* em placas DE-series: Descreve uma versão do Linux* disponível para uma variedade de sistemas embarcados que apresentam um dispositivo Intel® Cyclone® V System-on-Chip (SoC). O documento mostra como o Linux pode ser armazenado em uma memória microSD* que pode ser inserida na placa DE1-SoC e inicializada pelo processador ARM. E também como podem ser desenvolvidos programas de software que rodam no processador ARM no Linux, e fazem uso dos recursos de hardware na placa DE1-SoC. Esses recursos incluem periféricos no Hard Processor System (HPS) e periféricos de hardware personalizados implementados no FPGA (Field-Programmable Gate Array) no dispositivo SoC.
-
-## Arquitetura do ARM Cortex-A9
-
-
 
 ## Desenvolvimento
 
@@ -141,27 +152,19 @@ Após entender o formato das coordenadas do mouse, pudemos utilizar esses dados 
 
 O terminal é dividido em colunas e linhas, onde cada elemento dessas posições é um caracter de texto. Portanto, ele pode ser interpretado como um gráfico cartesiano onde os valores do eixo x são as colunas e os valores do eixo y são as linhas. Ao fazer a primeira leitura do arquivo de entrada do mouse, a posição determinada como inicial é a coordenada central dessa janela. 
 
-A partir do conhecimento de quais são as coordenadas desse ponto central, foram determinados onde ficariam os extremos e pontos do tabuleiro do jogo, para serem ligados um ao outro formando a visualização dessa matriz, como mostrado na Figura a seguir.
+A partir do conhecimento de quais são as coordenadas desse ponto central, foram determinados onde ficariam os extremos e pontos do tabuleiro do jogo (números da figura), para serem ligados um ao outro formando a visualização dessa matriz, como mostrado na animação a seguir.
 
 </p>
 <div align="center">
-   <img width="300px" src="resources\board-numbers.png" />
+   <img width="300px" src="resources\board-make-gif.gif" />
     <p> Figura . Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central</p>
 </div>
 
 Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro. Assim, foi possível posicionar e exibir os caracteres para formação do matriz do tabuleiro, como repesentado na figura a seguir.
 
-</p>
-<div align="center">
-   <img width="300px" src="resources\void-board.png" />
-    <p> Figura . Tabuleiro do Jogo</p>
-</div>
-
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
 A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal.
-
-**(imagens da visuaçização do jogo)
 
 - #### Lógica de funcionamento do jogo
 
@@ -273,9 +276,9 @@ O Jogo da Velha possui uma jogabilidade simples e rápida de compreender.
 
 Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas.
 
-Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse jogo, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para colocar a marca na célula selecionada.
+Inicia-se o jogo apertando o botão B0 da placa. Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse caso, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para posicionar a marca na célula selecionada.
 
-O objetivo é conseguir três marcas iguais em linha antes do adversário. Se todas as células do tabuleiro forem preenchidas e nenhum jogador conseguir formar uma linha, o jogo termina em empate.
+O objetivo é conseguir três marcas iguais em linha antes do adversário. Se todas as células do tabuleiro forem preenchidas e nenhum jogador conseguir formar uma linha, o jogo termina em empate. Para reiniciar uma partida, basta somente apertar novamento o botão de início.
 
 ## Resultados e Conclusão 
 
