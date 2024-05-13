@@ -58,7 +58,7 @@ O hardware programável utilizado para o projeto foi a placa de desenvolvimento 
 </p>
 <div align="center">
    <img width="500px" src="resources\DE1-SoC.png" />
-    <p> Figura 1. Kit de desenvolvimento DE1-SoC</p>
+    <p> Figura 1. Kit de desenvolvimento DE1-SoC.</p>
 </div>
 
 
@@ -85,7 +85,7 @@ Categoria|Especificações|
 </p>
 <div align="center">
    <img width="500px" src="resources\DE1-p.jpeg" />
-    <p> Figura 1. Periféricos utilizados do DE1-SoC</p>
+    <p> Figura 2. Periféricos utilizados do DE1-SoC.</p>
 </div>
 
 Dos periféricos da FPGA, utilizou-se a entrada de rede Ethernet para conexão remota, as portas USB para conectar o mouse e um dos botões (push-buttons) para iniciar ou encerrar o jogo. O botão escolhido para essa finalidade foi o Push-button[0] (representado no código como B0). O botão envia um nível lógico baixo quando pressionado e nível lógico alto quando não.
@@ -125,6 +125,12 @@ Iniciou-se o desenvolvimento do projeto do Jogo da Velha com uma análise detalh
 
 Com relação à conexão com a placa, foi estabelecida via SSH (Secure Shell), um protocolo de rede que permite acesso remoto a sistemas Linux. Isso possibilitou o controle e monitoramento do jogo a partir de um computador externo, simplificando o processo de desenvolvimento e depuração.
 
+</p>
+<div align="center">
+   <img width="500px" src="resources\ssh-conection.png" />
+    <p> Figura 3. Conexão ssh com a placa via terminal.</p>
+</div>
+
 O  Secure  Shell  oferece  ao  usuário  a  capacidade  de  conectar-se  remotamente  a outro computador com segurança, pois os dados utilizados na rede serão criptografados. O protocolo SSH tem como principal finalidade o login remoto, porém pode ser utilizado  como  túnel  criptográfico  para  outros  propósitos,  como  copiar  arquivos, proteção de conexões de e-mail e execução de programas remotos.
 
 Um servidor SSH permite que vários clientes SSH conectem-se a ele. O cliente precisa conhecer o endereço IP (ou hostname) do servidor (nesse caso, o IP da placa utilizada) e a porta em que está escutando. O cliente se autentica para acessar a sessão. O processo de conexão ocorre em três etapas: o cliente envia uma solicitação de autenticação para o servidor e recebe uma chave de host. O servidor determina se o cliente pode se conectar, verificando as credenciais fornecidas. Se o cliente for autenticado e autorizado, a sessão SSH é estabelecida entre os dois hosts.
@@ -135,7 +141,13 @@ Para obter os eventos do mouse, exploramos o sistema de arquivos do Linux, espec
 
 Uma das principais responsabilidades de um sistema operacional é gerenciar os dispositivos de entrada e saída (E/S). Isso inclui enviar comandos aos dispositivos, lidar com interrupções, tratar possíveis erros e fornecer uma interface para que os programas possam acessar esses dispositivos por meio de chamadas de sistema (system calls) para leitura e gravação.
 
-O sistema de E/S do Linux segue uma abordagem semelhante à de outros sistemas UNIX. Os drivers de dispositivos são apresentados aos usuários como  arquivos regulares, a fim de abstrair o resto do sistema ou o usuário das particularidades do hardware, simplificando essa interação. Assim, o acesso a um dispositivo é feito da mesma maneira que a abertura de um arquivo. Porém, estes arquivos que fornecem acesso a um dispositivo são denominados de arquivos especiais e estão associados a um diretório que se encontra dentro de /dev (no Linux, diretórios são tratados como arquivos). Esses arquivos especiais são vinculados aos drivers de dispositivo correspondentes.
+O sistema de E/S do Linux segue uma abordagem semelhante à de outros sistemas UNIX. Os drivers de dispositivos são apresentados aos usuários como  arquivos regulares, a fim de abstrair o resto do sistema ou o usuário das particularidades do hardware, simplificando essa interação. Assim, o acesso a um dispositivo é feito da mesma maneira que a abertura de um arquivo. Porém, estes arquivos que fornecem acesso a um dispositivo são denominados de arquivos especiais e estão associados a um diretório que se encontra dentro de `/dev` (no Linux, diretórios são tratados como arquivos). Esses arquivos especiais são vinculados aos drivers de dispositivo correspondentes.
+
+</p>
+<div align="center">
+   <img width="500px" src="resources\linux-dev-input-files.png" />
+    <p> Figura 4. Diretórios presentes no /dev e /dev/input.</p>
+</div>
 
 Logo, as permissões de leitura e escrita nos dispositivos são tratadas da mesma forma que nos arquivos normais. No entanto, em dispositivos como alto-falantes, apenas a escrita é permitida, enquanto em dispositivos como mouses, apenas a leitura é possível. O caminho do arquivo utilizado no projeto para realizar essa leitura foi:
 
@@ -163,14 +175,26 @@ A partir do conhecimento de quais são as coordenadas desse ponto central, foram
 </p>
 <div align="center">
    <img width="300px" src="resources\board-make-gif.gif" />
-    <p> Figura . Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central</p>
+    <p> Figura 4. Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central.</p>
 </div>
 
 Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro. Assim, foi possível posicionar e exibir os caracteres para formação do matriz do tabuleiro, como repesentado na figura a seguir.
 
 Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de um cursor, representado pelo símbolo "@" (arroba), que é exibido pela função printf exatamente no local onde está as coordenadas do mouse no terminal. Assim é possível visualizar mais facilmente aonde está localizado o mouse e selecionar a posição no tabuleiro.
 
+</p>
+<div align="center">
+   <img width="500px" src="resources\game-void-board.png" />
+    <p> Figura 5. Visualização do tabuleiro vazio do jogo e a indicação dos jogadores acima.</p>
+</div>
+
 A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal.
+
+</p>
+<div align="center">
+   <img width="500px" src="resources\start-menu.png" />
+    <p> Figura 6. Visualização do menu inicial do jogo.</p>
+</div>
 
 - #### Lógica de funcionamento do jogo
 
@@ -179,7 +203,7 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
 </p>
 <div align="center">
    <img width="800px" src="resources\mermaid-diagram-2024-05-11-015756.svg" />
-    <p> Figura . Fluxograma da lógica do jogo</p>
+    <p> Figura 7. Fluxograma da lógica do jogo.</p>
 </div>
 
 O jogo é iniciado na sua tela de *start* e, nesse momento, verifica-se o acionamento do botão. Se o jogo for iniciado (*state_game = 1*), o tabuleiro vazio é exibido e o primeiro jogador pode realizar a sua jogada, escolhendo a posição a partir do mouse. 
@@ -195,7 +219,7 @@ O estado do jogo é verificado a todo momento. Logo, quando o botão de iniciar 
 </p>
 <div align="center">
    <img width="600px" src="resources\state-machine-button.svg" />
-    <p> Figura . Diagrama de transição da máquina de estados para controle do acionamento do botão</p>
+    <p> Figura 8. Diagrama de transição da máquina de estados para controle do acionamento do botão.</p>
 </div>
 
 - #### Bibliotecas utilizadas
@@ -213,7 +237,7 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 </p>
 <div align="center">
    <img width="400px" src="resources\kernel-modules.jpeg" />
-    <p> Figura . Módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.</p>
+    <p> Figura 9. Módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.</p>
 </div>
 
 5. **sys/ioctl.h**: Realiza o fornecimento de funções para controle de dispositivos de E/S no sistema. É utilizada para realizar operações de controle sobre dispositivos de E/S.
@@ -281,7 +305,7 @@ O Jogo da Velha possui uma jogabilidade simples e rápida de compreender. Jogado
 </p>
 <div align="center">
    <img width="300px" src="resources\game-example.gif" />
-    <p> Figura 1. Exemplo de jogada</p>
+    <p> Figura 10. Exemplo de jogada.</p>
 </div>
 
 Inicia-se o jogo apertando o botão B0 da placa. Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse caso, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para posicionar a marca na célula selecionada.
@@ -296,9 +320,37 @@ Indo deste de a análise dos requisitos do projeto, especificações da arquitet
 
 É importante também, citar os principais desafios encontrados no decorrer do desenvolvimento, como: lidar com a exibição da interface do jogo em modo texto, saber como ler e captar corretamente as coordenadas do mouse e problemas de compilação.
 
-A seguir, as demonstrações dos testes finais realizados, seus respectivos resultados e exibindo o funcionamento real do jogo da velha desenvolvido:
+A seguir, demonstrações dos testes finais realizados, seus respectivos resultados e exibindo o funcionamento real do jogo da velha desenvolvido:
 
-****GIFs ou Vídeos do jogo
+- Vitória do Jogador 1:
+
+</p>
+<div align="center">
+   <img width="450px" src="resources\player-1-wins.gif" />
+</div>
+
+- Vitória do Jogador 2:
+
+</p>
+<div align="center">
+   <img width="450px" src="resources\player-1-win.gif" />
+</div>
+
+- Empate:
+
+</p>
+<div align="center">
+   <img width="450px" src="resources\player-1-win.gif" />
+</div>
+
+- Mensagens de erro, click fora ou na linha do tabuleiro:
+
+</p>
+<div align="center">
+   <img width="450px" src="resources\player-1-win.gif" />
+</div>
+
+
 
 Com este projeto, foi demonstrado a aplicação prática de conceitos de programação e integração de hardware e software. O Jogo da Velha implementado na placa DE1-SoC oferece uma maneira divertida e educativa de explorar as capacidades de programação e desenvolvimento de sistemas embarcados e ajuda na melhor compreensão da arquitetura de um computador.
 
