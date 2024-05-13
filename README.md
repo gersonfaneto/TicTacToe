@@ -36,7 +36,6 @@
     - [Compilação e Makefile](#compilação-e-makefile)
 - [Inicializando o projeto do jogo](#inicializando-o-projeto-do-jogo)
 - [Jogabilidade](#jogabilidade)
-  - [Como jogar](#como-jogar)
 - [Resultados e Conclusão](#resultados-e-conclusão)
 - [Tutor](#tutor)
 - [Equipe](#equipe)
@@ -277,11 +276,7 @@ Algumas etapas são nescessárias para a conexão via terminal com o kit de dese
 
 ## Jogabilidade
 
-O Jogo da Velha possui uma jogabilidade simples e rápida de compreender.
-
-### Como jogar
-
-Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas.
+O Jogo da Velha possui uma jogabilidade simples e rápida de compreender. Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas.
 
 Inicia-se o jogo apertando o botão B0 da placa. Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse caso, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para posicionar a marca na célula selecionada.
 
