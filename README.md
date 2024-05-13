@@ -24,7 +24,6 @@
   - [Principais Especificações HPS](#principais-especificações-hps)
   - [Periféricos utilizados](#periféricos-utilizados)
   - [Arquitetura do ARM Cortex-A9](#arquitetura-do-arm-cortex-a9)
-
 - [Documentação utilizada](#documentação-utilizada)
 - [Desenvolvimento](#desenvolvimento)
   - [Conexão remota com a placa DE1-SoC](#conexão-remota-com-a-placa-de1-soc)
