@@ -5,48 +5,62 @@
 #include "utils/ui.h"
 #include "app/appearance.h"
 
-//void init_matrix(board_t board, i8_t dimension);
+/**
+ * Initializes the game by setting up the initial board state.
+ *
+ * @param board A pointer to the structure representing the game board.
+ */
+void init_game(board_t *board);
 
+/**
+ * Closes the game by performing necessary cleanup operations.
+ */
+void close_game(void);
+
+/**
+ * Checks if a specific position on the board is empty.
+ *
+ * @param board The structure representing the game board.
+ * @param row The row of the position to be checked.
+ * @param column The column of the position to be checked.
+ * @return 1 if the position is empty, 0 otherwise.
+ */
 i8_t is_empty(board_t board, i8_t row, i8_t column);
 
-/*** 
-* This function checks if the player represented by the character 'playerCharacther' has won in any row of the matrix.
-* @param dimension The dimension of the matrix (number of rows/columns).
-* @param matrix The matrix to be checked.
-* @param playerCharacther The character representing the player.
-* @return 1 if the player has won, otherwise 0.
-*/
-i8_t verify_rows(board_t board, i8_t dimension, char playerCharacther);
-
-/*** 
-* This function checks if the player has won in any column of the matrix.
-* @param dimension The dimension of the matrix (number of rows/columns).
-* @param matrix The matrix to be checked.
-* @param playerCharacther The character representing the player.
-* @return 1 if the player has won, otherwise 0.
-*/
-i8_t verify_columns(board_t board, i8_t dimension, char playerCharacther);
+/**
+ * Checks if the board is full.
+ *
+ * @param board The structure representing the game board.
+ * @param dimension The size of the board's dimension.
+ * @return 1 if the board is full, 0 otherwise.
+ */
+i8_t is_board_full(board_t board, i8_t dimension);
 
 /**
- * Verifies if the player has won in the main diagonal of the matrix.
- * @param dimension The dimension of the matrix.
- * @param matrix The matrix to be checked.
- * @param playerCharacther The character representing the player.
- * @return Returns 1 if the player has won in the main diagonal, otherwise returns 0.
+ * Checks if a player has won.
+ *
+ * @param board The structure representing the game board.
+ * @param dimension The size of the board's dimension.
+ * @param playerCharacter The player's character ('X' or 'O').
+ * @return 1 if the player has won, 0 otherwise.
  */
-i8_t verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther);
+i8_t check_win(board_t board, i8_t dimension, char playerCharacter);
 
 /**
- * Verifies if the player has won in the secondary diagonal of the matrix.
- * @param dimension The dimension of the matrix.
- * @param matrix The matrix to be checked.
- * @param playerCharacther The character representing the player.
- * @return Returns 1 if the player has won in the secondary diagonal, otherwise returns 0.
+ * Checks if the game has ended in a tie.
+ *
+ * @param board The structure representing the game board.
+ * @param dimension The size of the board's dimension.
+ * @return 1 if the game has ended in a tie, 0 otherwise.
  */
-i8_t verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther);
+i8_t check_tie(board_t board, i8_t dimension);
 
-//void run_game(board_t* board, i8_t turns, i8_t* coordinates);
-
-i8_t check_win(board_t* board, i8_t dimension, char playerCharacter);
+/**
+ * Changes the state of the game.
+ *
+ * @param state The current state of the game.
+ * @param button The button pressed by the player.
+ */
+void change_state(i8_t *state, i8_t *button);
 
 #endif  // !ALGORITHM_H_

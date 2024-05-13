@@ -2,16 +2,30 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "state.h"
+#include "app/handlers.h"
 
-/*
-void init_matrix(board_t board, i8_t dimension) {
-  for(i8_t i = 0; i < dimension; ++i) {
-    for(i8_t j = 0; j < dimension; ++j) {
-      board.matrix[i][j] = '-';
-    }
-  }
-}*/
+void init_game(board_t *board) {
+  state.is_running = 1;
+  state.mouse = init_mouse();
+  state.window = init_window();
+  *board = init_board();
+
+  set_handlers();
+  printf("Starting...\n");
+  enter_alt_screen();
+  disable_cursor();
+  disable_echo();
+}
+
+void close_game(void) {
+  exit_alt_screen();
+  enable_cursor();
+  enable_echo();
+  close(state.mouse.fd);
+  printf("Closing...\n");
+}
 
 i8_t is_empty(board_t board, i8_t row, i8_t column) {
   if (board.matrix[row][column] == '-') {
@@ -20,80 +34,83 @@ i8_t is_empty(board_t board, i8_t row, i8_t column) {
   return 0;
 }
 
-i8_t verify_rows(board_t board, i8_t dimension, char playerCharacther) {
-  i8_t win;
-
-  for (i8_t i = 0; i < dimension; ++i) {
-    win = 1;
-    for (i8_t j = 0; j < dimension; ++j) {
-      if (board.matrix[i][j] != playerCharacther) {
-        win = 0;
-        break;
+i8_t is_board_full(board_t board, i8_t dimension) {
+  for(i8_t i = 0; i < dimension; ++i) {
+    for(i8_t j = 0; j < dimension; ++j) {
+      if(board.matrix[i][j] == '-') {
+        return 0;
       }
     }
-    if (win) {
-      return 1;
-    }
   }
-  return 0;
+  return 1;
 }
 
-i8_t verify_columns(board_t board, i8_t dimension, char playerCharacther) {
-  i8_t win;
+i8_t check_win(board_t board, i8_t dimension, char playerCharacter) {
+  i8_t main_diag_win = 1;
+  i8_t sec_diag_win = 1;
 
   for (i8_t i = 0; i < dimension; ++i) {
-    win = 1;
+    i8_t row_win = 1;
+    i8_t col_win = 1;
+
     for (i8_t j = 0; j < dimension; ++j) {
-      if (board.matrix[j][i] != playerCharacther) {
-        win = 0;
-        break;
+      if (board.matrix[i][j] != playerCharacter) {
+          row_win = 0;
+      }
+      if (board.matrix[j][i] != playerCharacter) {
+          col_win = 0;
       }
     }
-    if (win) {
+
+    if (row_win || col_win) {
       return 1;
     }
-  }
-  return 0;
-}
 
-i8_t verify_main_diagonal(board_t board, i8_t dimension, char playerCharacther) {
-  i8_t win;
+    if (board.matrix[i][i] != playerCharacter) {
+      main_diag_win = 0;
+    }
 
-  for (i8_t i = 0; i < dimension; ++i) {
-    win = 1;
-    if (board.matrix[i][i] != playerCharacther) {
-      win = 0;
-      break;
+    if (board.matrix[i][dimension - 1 - i] != playerCharacter) {
+      sec_diag_win = 0;
     }
   }
-  if (win) {
+
+  if (main_diag_win || sec_diag_win) {
+      return 1;
+  }
+
+  return 0; 
+}
+
+i8_t check_tie(board_t board, i8_t dimension) {
+
+  if(is_board_full(board, dimension) && !check_win(board, dimension, 'X') && !check_win(board, dimension, 'O')) {
     return 1;
   }
   return 0;
 }
 
-i8_t verify_secundary_diagonal(board_t board, i8_t dimension, char playerCharacther) {
-  i8_t win = 1;
+void change_state(i8_t *state_game, i8_t *button) {
 
-  for (i8_t i = 0; i < dimension; ++i) {
-    if (board.matrix[i][dimension - 1 - i] != playerCharacther) {
-      win = 0;
+  switch (*state_game) {
+    case 0:
+      if(*button == 1) {
+        *state_game = 1;
+      }
       break;
-    }
-  }
-  if (win) {
-    return 1;
-  }
-  return 0;
-}
+    
+    case 1:
+      if(*button == 1) {
+        *state_game = 0; 
+      }
+      else if(*button == 2) {
+        state.is_running = 0;
+      }
+      break;
 
-i8_t check_win(board_t* board, i8_t dimension, char playerCharacter) {
-  if(verify_rows(*board, dimension, playerCharacter) ||
-     verify_columns(*board, dimension, playerCharacter) ||
-     verify_main_diagonal(*board, dimension, playerCharacter) ||
-     verify_secundary_diagonal(*board, dimension, playerCharacter)) {
-      return 1;
+    default:
+      break;
   }
-  return 0;
+
 }
 

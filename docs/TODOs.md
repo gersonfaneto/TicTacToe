@@ -12,3 +12,5 @@
 
 - Acertar lógica da finalização do jogo, as mensagens continuam aparecendo mesmo depois do tabuleiro completo no caso de empate
 
+- Problema quando seguramos o mouse em cima das casas
+
