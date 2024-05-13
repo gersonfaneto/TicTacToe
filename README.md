@@ -20,17 +20,25 @@
 
 - [Introdução](#introdução)
 - [Hardware utilizado](#hardware-utilizado)
+  - [Principais Especificações FPGA](#principais-especificações-fpga)
+  - [Principais Especificações HPS](#principais-especificações-hps)
+  - [Periféricos utilizados](#periféricos-utilizados)
+  - [Arquitetura do ARM Cortex-A9](#arquitetura-do-arm-cortex-a9)
+
 - [Documentação utilizada](#documentação-utilizada)
 - [Desenvolvimento](#desenvolvimento)
   - [Conexão remota com a placa DE1-SoC](#conexão-remota-com-a-placa-de1-soc)
   - [Detectando o mouse](#detectando-o-mouse)
-  - [Construção da lógica e exibição do jogo](#construção-da-lógica-e-exibição-do-jogo)
+    - [Modularização do código](#modularização-do-código)
+  - [Implementação da lógica e exibição do jogo](#implementação-da-lógica-e-exibição-do-jogo)
+    -[Identificação das coordenadas e exibição do tabuleiro](#identificação-das-coordenadas-e-exibição-do-tabuleiro)
+    - [Lógica de funcionamento do jogo](#lógica-de-funcionamento-do-jogo)
+    - [Bibliotecas utilizadas](#bibliotecas-utilizadas)
+    - [Compilação e Makefile](#compilação-e-makefile)
 - [Inicializando o projeto do jogo](#inicializando-o-projeto-do-jogo)
 - [Jogabilidade](#jogabilidade)
   - [Como jogar](#como-jogar)
-  - [Resultados](#resultados)
-- [Testes](#testes)
-- [Conclusão](#conclusão) 
+- [Resultados e Conclusão](#resultados-e-conclusão)
 - [Tutor](#tutor)
 - [Equipe](#equipe)
 - [Referências](#referências)
@@ -290,7 +298,7 @@ Indo deste de a análise dos requisitos do projeto, especificações da arquitet
 
 A seguir, as demonstrações dos testes finais realizados, seus respectivos resultados e exibindo o funcionamento real do jogo da velha desenvolvido:
 
-****GIFs do jogo
+****GIFs ou Vídeos do jogo
 
 Com este projeto, foi demonstrado a aplicação prática de conceitos de programação e integração de hardware e software. O Jogo da Velha implementado na placa DE1-SoC oferece uma maneira divertida e educativa de explorar as capacidades de programação e desenvolvimento de sistemas embarcados e ajuda na melhor compreensão da arquitetura de um computador.
 
