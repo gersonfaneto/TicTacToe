@@ -30,7 +30,7 @@
   - [Detectando o mouse](#detectando-o-mouse)
     - [Modularização do código](#modularização-do-código)
   - [Implementação da lógica e exibição do jogo](#implementação-da-lógica-e-exibição-do-jogo)
-    -[Identificação das coordenadas e exibição do tabuleiro](#identificação-das-coordenadas-e-exibição-do-tabuleiro)
+    - [Identificação das coordenadas e exibição do tabuleiro](#identificação-das-coordenadas-e-exibição-do-tabuleiro)
     - [Lógica de funcionamento do jogo](#lógica-de-funcionamento-do-jogo)
     - [Bibliotecas utilizadas](#bibliotecas-utilizadas)
     - [Compilação e Makefile](#compilação-e-makefile)
