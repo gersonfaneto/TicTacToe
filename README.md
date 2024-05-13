@@ -127,7 +127,7 @@ Com relação à conexão com a placa, foi estabelecida via SSH (Secure Shell), 
 
 </p>
 <div align="center">
-   <img width="500px" src="resources\ssh-conection.png" />
+   <img width="550px" src="resources\ssh-conection.png" />
     <p> Figura 3. Conexão ssh com a placa via terminal.</p>
 </div>
 
@@ -175,7 +175,7 @@ A partir do conhecimento de quais são as coordenadas desse ponto central, foram
 </p>
 <div align="center">
    <img width="300px" src="resources\board-make-gif.gif" />
-    <p> Figura 4. Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central.</p>
+    <p> Figura 5. Posições para as linhas e colunas do tabuleiro do jogo a partir do ponto central.</p>
 </div>
 
 Em seguida, na função de iniciar a matriz é armazenado a posição das quatro colunas e quatro linhas do tabuleiro. Assim, foi possível posicionar e exibir os caracteres para formação do matriz do tabuleiro, como repesentado na figura a seguir.
@@ -185,7 +185,7 @@ Com respeito a seleção do quadrante pelos jogadores, foi determinado o uso de 
 </p>
 <div align="center">
    <img width="500px" src="resources\game-void-board.png" />
-    <p> Figura 5. Visualização do tabuleiro vazio do jogo e a indicação dos jogadores acima.</p>
+    <p> Figura 6. Visualização do tabuleiro vazio do jogo e a indicação dos jogadores acima.</p>
 </div>
 
 A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo, foram todos construídos a partir de caracteres de texto. Do tipo String, o tabuleiro e os outros elementos são exibidos 'printando' linha a linha de acordo com as coordenadas da janela do terminal.
@@ -193,7 +193,7 @@ A aparência do tabuleiro, juntamente com o visual dos outros elementos do jogo,
 </p>
 <div align="center">
    <img width="500px" src="resources\start-menu.png" />
-    <p> Figura 6. Visualização do menu inicial do jogo.</p>
+    <p> Figura 7. Visualização do menu inicial do jogo.</p>
 </div>
 
 - #### Lógica de funcionamento do jogo
@@ -203,7 +203,7 @@ A lógica do Jogo da Velha foi implementada, seguindo as regras tradicionais do 
 </p>
 <div align="center">
    <img width="800px" src="resources\mermaid-diagram-2024-05-11-015756.svg" />
-    <p> Figura 7. Fluxograma da lógica do jogo.</p>
+    <p> Figura 8. Fluxograma da lógica do jogo.</p>
 </div>
 
 O jogo é iniciado na sua tela de *start* e, nesse momento, verifica-se o acionamento do botão. Se o jogo for iniciado (*state_game = 1*), o tabuleiro vazio é exibido e o primeiro jogador pode realizar a sua jogada, escolhendo a posição a partir do mouse. 
@@ -219,7 +219,7 @@ O estado do jogo é verificado a todo momento. Logo, quando o botão de iniciar 
 </p>
 <div align="center">
    <img width="600px" src="resources\state-machine-button.svg" />
-    <p> Figura 8. Diagrama de transição da máquina de estados para controle do acionamento do botão.</p>
+    <p> Figura 9. Diagrama de transição da máquina de estados para controle do acionamento do botão.</p>
 </div>
 
 - #### Bibliotecas utilizadas
@@ -232,12 +232,12 @@ O uso de bibliotecas auxiliaram diversos processos na implementação do sistema
 
 3. **unistd.h**: Esta biblioteca fornece acesso a várias constantes e funções do sistema operacional relacionadas ao POSIX (Portable Operating System Interface). É utilizada para funções de sistema, como sleep(), que é usada para pausar a execução do programa por um determinado número de segundos.
 
-4. **intelfpgaup/XX.h**: Biblioteca específica que fornece funcionalidades relacionadas ao hardware da placa Intel FPGA. Ela é utilizada para acessar os botões da placa, possibilitando a interação do usuário com o jogo. O XX.h deve ser substituído pelo nome do driver a ser acessado, nesse caso o KEY.h, usado para acesso à porta dos botões da placa. Como representado na tabela a baixo, que informa os módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.
+4. **intelfpgaup/XX.h**: Biblioteca específica que fornece funcionalidades relacionadas ao hardware da placa Intel FPGA. Ela é utilizada para acessar os botões da placa, possibilitando a interação do usuário com o jogo. O XX.h deve ser substituído pelo nome do driver a ser acessado, nesse caso o KEY.h, usado para acesso à porta dos botões da placa. Como representado a baixo (Figura 10), que informa os módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.
 
 </p>
 <div align="center">
    <img width="400px" src="resources\kernel-modules.jpeg" />
-    <p> Figura 9. Módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.</p>
+    <p> Figura 10. Módulos disponibilizados pelo De1-SoC para o acesso dos dispositivos da placa.</p>
 </div>
 
 5. **sys/ioctl.h**: Realiza o fornecimento de funções para controle de dispositivos de E/S no sistema. É utilizada para realizar operações de controle sobre dispositivos de E/S.
@@ -300,12 +300,12 @@ Algumas etapas são nescessárias para a conexão via terminal com o kit de dese
 
 ## Jogabilidade
 
-O Jogo da Velha possui uma jogabilidade simples e rápida de compreender. Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas. Segue exemplo de uma partida completa do jogo.
+O Jogo da Velha possui uma jogabilidade simples e rápida de compreender. Jogado em um tabuleiro 3x3. O jogador "X" é o primeiro a jogar e deve escolher uma célula vazia para colocar sua marca "X". Em seguida, o jogador "O" (player 2) faz sua jogada, escolhendo outra célula vazia para colocar sua marca "O". Os jogadores alternam suas jogadas até que alguém consiga formar uma linha horizontal, vertical ou diagonal com suas marcas. Segue exemplo de uma partida completa do jogo (Figura 11).
 
 </p>
 <div align="center">
    <img width="300px" src="resources\game-example.gif" />
-    <p> Figura 10. Exemplo de jogada.</p>
+    <p> Figura 11. Exemplo de jogada.</p>
 </div>
 
 Inicia-se o jogo apertando o botão B0 da placa. Para fazer uma jogada, o jogador deve selecionar a posição desejada no tabuleiro. Nesse caso, a seleção é feita usando o mouse conectado à placa DE1-SoC. Basta mover o cursor do mouse para a posição desejada e clicar para posicionar a marca na célula selecionada.
@@ -322,35 +322,35 @@ Indo deste de a análise dos requisitos do projeto, especificações da arquitet
 
 A seguir, demonstrações dos testes finais realizados, seus respectivos resultados e exibindo o funcionamento real do jogo da velha desenvolvido:
 
-- Vitória do Jogador 1:
+- Vitória do Jogador X:
 
 </p>
 <div align="center">
    <img width="450px" src="resources\player-1-wins.gif" />
 </div>
 
-- Vitória do Jogador 2:
+- Vitória do Jogador O:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\player-1-win.gif" />
+   <img width="450px" src="resources\player-2-win.gif" />
 </div>
 
 - Empate:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\player-1-win.gif" />
+   <img width="450px" src="resources\tie-example.gif" />
 </div>
 
 - Mensagens de erro, click fora ou na linha do tabuleiro:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\player-1-win.gif" />
+   <img width="450px" src="resources\error-example.gif" />
 </div>
 
-
+---
 
 Com este projeto, foi demonstrado a aplicação prática de conceitos de programação e integração de hardware e software. O Jogo da Velha implementado na placa DE1-SoC oferece uma maneira divertida e educativa de explorar as capacidades de programação e desenvolvimento de sistemas embarcados e ajuda na melhor compreensão da arquitetura de um computador.
 
