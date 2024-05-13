@@ -354,7 +354,7 @@ A seguir, demonstrações dos testes finais realizados, seus respectivos resulta
 
 Com este projeto, foi demonstrado a aplicação prática de conceitos de programação e integração de hardware e software. O Jogo da Velha implementado na placa DE1-SoC oferece uma maneira divertida e educativa de explorar as capacidades de programação e desenvolvimento de sistemas embarcados e ajuda na melhor compreensão da arquitetura de um computador.
 
-## License
+## Equipe
 
 Released under [MIT][license-url] by:
 
