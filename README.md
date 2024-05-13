@@ -326,28 +326,28 @@ A seguir, demonstrações dos testes finais realizados, seus respectivos resulta
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\player-1-wins.gif" />
+   <img width="550px" src="resources\player-1-wins.gif" />
 </div>
 
 - Vitória do Jogador O:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\player-2-win.gif" />
+   <img width="550px" src="resources\player-2-win.gif" />
 </div>
 
 - Empate:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\tie-example.gif" />
+   <img width="550px" src="resources\tie-example.gif" />
 </div>
 
 - Mensagens de erro, click fora ou na linha do tabuleiro:
 
 </p>
 <div align="center">
-   <img width="450px" src="resources\error-example.gif" />
+   <img width="550px" src="resources\error-example.gif" />
 </div>
 
 ---
